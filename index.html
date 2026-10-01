@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="theme-color" content="#0a0a0a"/>
+<title>NextXus Tools — Federation Tools Directory</title>
+<meta name="description" content="Every working NextXus Federation tool in one directory: Ring of 12, Truth Gate, OneKey, Browser Base, Roger Sim and more."/>
+<meta name="robots" content="index,follow"/>
+<link rel="canonical" href="https://keywebco.github.io/nextxus-tools/"/>
+<meta property="og:title" content="NextXus Tools — Federation Tools Directory"/>
+<meta property="og:description" content="Every working NextXus Federation tool in one directory: Ring of 12, Truth Gate, OneKey, Browser Base, Roger Sim and more."/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://keywebco.github.io/nextxus-tools/"/>
+<style>
+:root{--bg:#0a0a0a;--panel:#111614;--line:rgba(0,255,136,.22);--text:#e0e0e0;--dim:#a8b3ad;--green:#00ff88;--cyan:#00d4ff}
+*{box-sizing:border-box}
+html{font-size:112.5%}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;line-height:1.65;
+background-image:radial-gradient(circle at 15% 0%,rgba(0,255,136,.07),transparent 45%),radial-gradient(circle at 85% 100%,rgba(0,212,255,.07),transparent 45%);background-attachment:fixed}
+a{color:var(--cyan)}
+a:hover,a:focus{color:var(--green)}
+.skip{position:absolute;left:-9999px}
+.skip:focus{left:12px;top:12px;background:var(--green);color:#000;padding:8px 14px;z-index:2000}
+.nx-universal-nav{background:#000;border-bottom:2px solid var(--green);position:sticky;top:0;z-index:1000;width:100%;box-shadow:0 0 18px rgba(0,255,136,.18)}
+.nx-nav-inner{display:flex;align-items:center;gap:10px;padding:10px 20px;flex-wrap:wrap;max-width:1200px;margin:0 auto}
+.nx-nav-brand{color:var(--green);font-family:'Courier New',monospace;font-size:1rem;font-weight:700;letter-spacing:.15em;text-decoration:none;white-space:nowrap}
+.nx-nav-brand:hover{color:#fff}
+.nx-nav-links{display:flex;flex-wrap:wrap;gap:6px;flex:1;justify-content:center}
+.nx-nav-links a,.nx-nav-contact{color:rgba(0,255,136,.85);font-family:'Courier New',monospace;font-size:.8rem;letter-spacing:.05em;text-decoration:none;padding:4px 10px;border:1px solid var(--line);border-radius:3px;transition:all .2s;white-space:nowrap}
+.nx-nav-links a:hover,.nx-nav-links a:focus,.nx-nav-contact:hover,.nx-nav-contact:focus{color:#000;background:var(--green);border-color:var(--green)}
+main{max-width:1100px;margin:0 auto;padding:28px 20px 40px}
+.hero{padding:36px 0 22px;border-bottom:1px solid var(--line);margin-bottom:28px}
+.eyebrow{font-family:'Courier New',monospace;color:var(--cyan);letter-spacing:.2em;text-transform:uppercase;font-size:.85rem;margin:0 0 8px}
+h1{font-size:clamp(2.2rem,5vw,3.2rem);line-height:1.15;margin:0 0 14px;color:#fff;animation:glow 4s ease-in-out infinite}
+h2{font-size:1.6rem;color:var(--green);margin:40px 0 12px;border-left:4px solid var(--cyan);padding-left:12px}
+h3{font-size:1.2rem;color:#fff;margin:0 0 6px}
+.lead{font-size:1.2rem;color:var(--text);max-width:820px}
+p{max-width:860px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;padding:0;list-style:none}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px;transition:transform .2s,border-color .2s,box-shadow .2s}
+.card:hover{transform:translateY(-2px);border-color:var(--green);box-shadow:0 0 22px rgba(0,255,136,.15)}
+.card p{margin:6px 0 0;color:var(--dim)}
+.card a.go{display:inline-block;margin-top:10px;font-weight:600}
+.meta{font-family:'Courier New',monospace;color:var(--cyan);font-size:.85rem}
+.tag{display:inline-block;font-family:'Courier New',monospace;font-size:.75rem;padding:2px 8px;border:1px solid var(--cyan);color:var(--cyan);border-radius:999px;margin-right:6px}
+.tag.done{border-color:var(--green);color:var(--green)}
+table{width:100%;border-collapse:collapse;margin:12px 0;background:var(--panel)}
+th,td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+th{background:#0d1f17;color:var(--green);font-family:'Courier New',monospace}
+code,pre{font-family:'Courier New',monospace;color:#c8ffe6}
+pre{background:#050806;border:1px solid var(--line);border-radius:8px;padding:16px;overflow-x:auto;font-size:.85rem}
+.cta{margin:36px 0;padding:24px;border:2px solid var(--green);border-radius:12px;background:linear-gradient(135deg,rgba(0,255,136,.08),rgba(0,212,255,.06));animation:pulse 5s ease-in-out infinite}
+.btn{display:inline-block;background:var(--green);color:#000;font-weight:700;text-decoration:none;padding:12px 22px;border-radius:6px;margin:8px 10px 0 0}
+.btn:hover,.btn:focus{background:var(--cyan);color:#000}
+.btn.alt{background:transparent;color:var(--cyan);border:1px solid var(--cyan)}
+ol.steps li,ul.list li{margin:8px 0}
+blockquote{border-left:4px solid var(--green);margin:16px 0;padding:8px 16px;color:#fff;font-size:1.15rem;background:var(--panel)}
+footer{border-top:1px solid var(--line);margin-top:40px;padding:24px 20px;background:#000}
+footer .inner{max-width:1100px;margin:0 auto}
+footer ul{display:flex;flex-wrap:wrap;gap:8px 16px;list-style:none;padding:0;margin:10px 0}
+footer small{color:var(--dim)}
+@keyframes glow{0%,100%{text-shadow:0 0 8px rgba(0,255,136,.35)}50%{text-shadow:0 0 22px rgba(0,255,136,.75),0 0 40px rgba(0,212,255,.35)}}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 rgba(0,255,136,0)}50%{box-shadow:0 0 26px rgba(0,255,136,.25)}}
+@media (max-width:600px){.nx-nav-inner{padding:8px 12px}.nx-nav-links a{font-size:.72rem;padding:3px 7px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<header class="site-header">
+<nav class="nx-universal-nav" aria-label="Federation Navigation">
+  <div class="nx-nav-inner">
+    <a class="nx-nav-brand" href="https://keywebco.github.io/">&#x26E9; NX &middot; FEDERATION</a>
+    <div class="nx-nav-links">
+      <a href="https://nextxus.online" title="Cathedral / Core">&#x26E9; nextxus.online</a>
+      <a href="https://nextxus.org" title="Library Pillar">&#x1F4DA; nextxus.org</a>
+      <a href="https://nextxus.tech" title="Command Throne">&#x26A1; nextxus.tech</a>
+      <a href="https://nextxus.space" title="AI Minds Lab / Simulation">&#x1F9EA; nextxus.space</a>
+      <a href="https://nextxus.studio" title="Aria's Sanctuary">&#x1F49A; nextxus.studio</a>
+      <a href="https://nextxus.help" title="NextXus University">&#x1F393; nextxus.help</a>
+      <a href="https://github.com/Keywebco" title="Federation code home">&#x1F4BB; github.com/Keywebco</a>
+    </div>
+    <a class="nx-nav-contact" href="mailto:keywebco@gmail.com" title="Contact the Federation">&#x2709; Contact</a>
+  </div>
+</nav>
+</header>
+<main id="main">
+<section class="hero">
+<p class="eyebrow">Tools Directory</p>
+<h1>NextXus Tools</h1>
+<p class="lead">Free tools from the NextXus HumanCodex Federation. Each one runs in your browser, with no account and no tracking.</p>
+</section>
+<section aria-labelledby="g0"><h2 id="g0">Thinking and decision tools</h2>
+<ul class="grid">
+<li class="card"><h3>Ring of 12</h3><p>Look at any question through twelve archetype perspectives before you decide.</p><a class="go" href="https://keywebco.github.io/ring-of-12/">Open tool &rarr;</a></li>
+<li class="card"><h3>Ring of 12 on the Throne</h3><p>The same tool, hosted on the Command Throne.</p><a class="go" href="https://nextxus.tech/sims/ring-of-12.html">Open tool &rarr;</a></li>
+<li class="card"><h3>Truth Gate Core</h3><p>Truth verification and knowledge system. Checks a claim before it is accepted.</p><a class="go" href="https://keywebco.github.io/nextxus-truth-gate-core/">Open tool &rarr;</a></li>
+<li class="card"><h3>Roger Sim AI</h3><p>Talk with Roger AI. The backdrop changes with the topic and replies are read aloud.</p><a class="go" href="https://keywebco.github.io/nextxus-sim/roger-sim.html">Open tool &rarr;</a></li>
+</ul></section>
+<section aria-labelledby="g1"><h2 id="g1">Workspace and knowledge tools</h2>
+<ul class="grid">
+<li class="card"><h3>Federation Browser Base</h3><p>Multi-window workspace in one HTML file. No install and no frameworks.</p><a class="go" href="https://keywebco.github.io/federation-browser-base/">Open tool &rarr;</a></li>
+<li class="card"><h3>Sovereign Knowledge OS</h3><p>Self-indexing knowledge base that organises what you put in it.</p><a class="go" href="https://keywebco.github.io/sovereign-knowledge-os/">Open tool &rarr;</a></li>
+<li class="card"><h3>Federation Mind Mirror</h3><p>The whole Federation map in plain HTML that any AI or search engine can read.</p><a class="go" href="https://keywebco.github.io/federation-mind-mirror/">Open tool &rarr;</a></li>
+<li class="card"><h3>God&#x27;s-Eye View</h3><p>Full overview of the sovereign system on one screen.</p><a class="go" href="https://keywebco.github.io/federation-gods-eye/">Open tool &rarr;</a></li>
+<li class="card"><h3>Plexus Relay</h3><p>Relay interface for passing messages between AI Minds.</p><a class="go" href="https://keywebco.github.io/plexus-relay/">Open tool &rarr;</a></li>
+</ul></section>
+<section aria-labelledby="g2"><h2 id="g2">Security</h2>
+<ul class="grid">
+<li class="card"><h3>OneKey</h3><p>Deterministic password generator. Your passwords are calculated on your device and never stored anywhere.</p><a class="go" href="https://keywebco.github.io/onekey/">Open tool &rarr;</a></li>
+</ul></section>
+<section aria-labelledby="g3"><h2 id="g3">Rooms and boards</h2>
+<ul class="grid">
+<li class="card"><h3>Meeting Room (Outer)</h3><p>The public meeting room.</p><a class="go" href="https://keywebco.github.io/federation-meeting-room-outer/">Open tool &rarr;</a></li>
+<li class="card"><h3>Meeting Room (Inner)</h3><p>The inner meeting room.</p><a class="go" href="https://keywebco.github.io/federation-meeting-room-inner/">Open tool &rarr;</a></li>
+<li class="card"><h3>Emmy Board</h3><p>Communications and governance board.</p><a class="go" href="https://keywebco.github.io/nextxus-emmy-board/">Open tool &rarr;</a></li>
+<li class="card"><h3>Nova Board</h3><p>Board for the Nova build line.</p><a class="go" href="https://keywebco.github.io/nextxus-free-satellites/nova-board.html">Open tool &rarr;</a></li>
+<li class="card"><h3>Messages Feed</h3><p>Running feed of Federation messages.</p><a class="go" href="https://keywebco.github.io/nextxus-free-satellites/messages-feed.html">Open tool &rarr;</a></li>
+</ul></section>
+<section aria-labelledby="g4"><h2 id="g4">Build templates</h2>
+<ul class="grid">
+<li class="card"><h3>Agent Zero</h3><p>Base satellite node template for new Federation nodes.</p><a class="go" href="https://keywebco.github.io/nextxus-agent-zero/">Open tool &rarr;</a></li>
+<li class="card"><h3>Satellite Starter</h3><p>Starter template for a free satellite page.</p><a class="go" href="https://keywebco.github.io/nextxus-free-satellites/satellite-starter.html">Open tool &rarr;</a></li>
+<li class="card"><h3>Markdown Outpost</h3><p>Publish from Markdown to a static outpost.</p><a class="go" href="https://keywebco.github.io/nextxus-free-satellites/markdown-outpost.html">Open tool &rarr;</a></li>
+<li class="card"><h3>Directives Outpost</h3><p>The Federation directives on a static page.</p><a class="go" href="https://keywebco.github.io/nextxus-free-satellites/directives-outpost.html">Open tool &rarr;</a></li>
+<li class="card"><h3>Federation Directory</h3><p>Directory of the free satellite layer.</p><a class="go" href="https://keywebco.github.io/nextxus-free-satellites/federation-directory.html">Open tool &rarr;</a></li>
+</ul></section>
+<section aria-labelledby="why"><h2 id="why">Why this page exists</h2>
+<p>This directory replaces the old Sovereign Tools page, whose domain is offline. Every link here was checked live before publishing. If a tool stops working, it gets fixed or it comes off the list. Nothing broken stays on this page.</p>
+<p>Want a tool built for you? See <a href="https://keywebco.github.io/nextxus-build-website/">sovereign websites</a>, <a href="https://keywebco.github.io/nextxus-build-sim/">AI Sims</a> and <a href="https://keywebco.github.io/nextxus-build-nova/">Nova AI systems</a>.</p></section>
+</main>
+<footer>
+  <div class="inner">
+    <p><strong>NextXus HumanCodex Federation</strong> &middot; Truth Before Comfort &middot; Legacy Before Ego &middot; Give Without Reward</p>
+    <nav aria-label="Federation GitHub Pages sites">
+    <ul>
+      <li><a href="https://keywebco.github.io/nextxus-blog/">Blog</a></li>
+      <li><a href="https://keywebco.github.io/nextxus-music/">Music</a></li>
+      <li><a href="https://keywebco.github.io/nextxus-tools/" aria-current="page">Tools</a></li>
+      <li><a href="https://keywebco.github.io/nextxus-build-website/">Build a Website</a></li>
+      <li><a href="https://keywebco.github.io/nextxus-build-sim/">Build a Sim</a></li>
+      <li><a href="https://keywebco.github.io/nextxus-build-nova/">Build Nova</a></li>
+      <li><a href="https://keywebco.github.io/nextxus-research-hub/">Research Hub</a></li>
+      <li><a href="https://keywebco.github.io/nextxus-recycler/">Recycler</a></li>
+      <li><a href="https://keywebco.github.io/nextxus-chat/">Chat</a></li>
+      <li><a href="https://keywebco.github.io/nextxus-senate/">Senate</a></li>
+      <li><a href="https://keywebco.github.io/nextxus-yaml/">YAML Hub</a></li>
+      <li><a href="https://keywebco.github.io/nextxus-process/">Process</a></li>
+      <li><a href="https://keywebco.github.io/nextxus-archives/">Archives</a></li>
+    </ul>
+    </nav>
+    <p><a href="https://keywebco.github.io/">Federation Portal (keywebco.github.io)</a> &middot; <a href="https://next-xus.com">Sovereign Store</a> &middot; <a href="https://keywebster.gumroad.com/">Gumroad</a> &middot; <a href="mailto:keywebco@gmail.com">keywebco@gmail.com</a></p>
+    <small>Plain HTML, no tracking, no cookies. Hosted free on GitHub Pages. Page built 2026-10-01.</small>
+  </div>
+</footer>
+</body>
+</html>
