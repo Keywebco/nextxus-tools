@@ -116,3 +116,9 @@ work is not lost.
 - 7 new client-side utilities, 55 -> 62 cards: text-tools, calculator, unit-converter, color-picker, code-beautifier, randomizer, image-resize. No API key, no server, no spending, nothing uploaded.
 - Cross-links: guides-index + federation-directory (62 tools) in nextxus-free-satellites; player footer in nextxus-music.
 - Still open: Batch 3 floating menu widget (needs Roger's mascot decision); pillar landing-page notes; full Directory re-index.
+
+## Batch 3 — floating menu widget (2026-11-06, merged on Roger's approve-all + go-for-it)
+- Mascot robot sent by Roger 2026-11-06 (blue/silver robot with wings, yellow smiling eyes, AI on chest) — NOT the dragon/Draco; this robot is the mascot. Black-background version is mascot-robot.jpg (widget icon); white version kept as mascot-robot-white.jpg.
+- Floating widget on the tools index page: fixed robot button (bottom right, above the voice bar), opens a menu to Tools, Federation Directory, Federation Search, Music Player, DeepAI tools, and the DeepAI HumanCodex site. Client-side only, no key, no server, nothing spent.
+- Search note corrected in the same edit: Federation Search is now 25 sites, including the five public Google Docs added 2026-11-06.
+- Still open: pillar landing-page notes; full Directory re-index.
