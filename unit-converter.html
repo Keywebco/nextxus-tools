@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="theme-color" content="#0a0a0a"/>
+<title>Unit Converter — NextXus Tools</title>
+<meta name="description" content="Convert length, weight, temperature and volume instantly, in your browser. No account, no tracking, works offline."/>
+<style>
+:root{--bg:#0a0a0a;--panel:#111614;--line:rgba(0,255,136,.22);--text:#e0e0e0;--dim:#a8b3ad;--green:#00ff88;--cyan:#00d4ff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;line-height:1.65;font-size:1.125rem}
+main{max-width:760px;margin:0 auto;padding:28px 20px 40px}
+a{color:var(--cyan)}a:hover,a:focus{color:var(--green)}
+.back{display:inline-block;margin-bottom:20px;font-size:1.1rem}
+h1{font-size:2.4rem;line-height:1.15;margin:0 0 10px;color:#fff}
+.lead{font-size:1.25rem;color:var(--text);max-width:700px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:22px;margin-top:24px}
+label{display:block;font-weight:700;margin:16px 0 6px;color:#fff}
+select,input{width:100%;background:#000;color:#fff;border:1px solid var(--line);border-radius:8px;padding:14px;font-size:1.25rem;font-family:inherit}
+select:focus,input:focus{outline:3px solid var(--green);outline-offset:2px}
+.row{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:end}
+.swap{background:var(--green);color:#000;border:none;border-radius:8px;padding:14px 16px;font-size:1.25rem;font-weight:700;cursor:pointer;margin-bottom:0}
+.swap:hover{background:var(--cyan)}
+.result{margin-top:20px;padding:18px;background:#050806;border:1px solid var(--green);border-radius:8px;font-size:1.5rem;color:#fff;word-break:break-word}
+.result small{display:block;font-size:1rem;color:var(--dim);margin-top:4px}
+.note{color:var(--dim);font-size:1rem;margin-top:24px}
+footer{border-top:1px solid var(--line);margin-top:40px;padding-top:16px;color:var(--dim);font-size:1rem}
+</style>
+</head>
+<body>
+<main>
+<a class="back" href="https://keywebco.github.io/nextxus-tools/">&larr; Back to Tools</a>
+<h1>Unit Converter</h1>
+<p class="lead">Convert length, weight, temperature and volume instantly. Type a number and the answer updates as you type. Everything runs in your browser — nothing is sent anywhere.</p>
+
+<div class="card">
+<label for="category">Category</label>
+<select id="category">
+<option value="length">Length</option>
+<option value="weight">Weight</option>
+<option value="temperature">Temperature</option>
+<option value="volume">Volume</option>
+</select>
+
+<label for="amount">Amount</label>
+<input id="amount" type="number" inputmode="decimal" value="1" step="any"/>
+
+<div class="row">
+<div>
+<label for="fromUnit">From</label>
+<select id="fromUnit"></select>
+</div>
+<button class="swap" id="swap" type="button" aria-label="Swap from and to units">&#8646; Swap</button>
+<div>
+<label for="toUnit">To</label>
+<select id="toUnit"></select>
+</div>
+</div>
+
+<div class="result" id="result" aria-live="polite">—</div>
+</div>
+
+<p class="note">Notes: cups, fluid ounces and gallons use US measures. Temperature converts between Celsius, Fahrenheit and Kelvin.</p>
+<footer>NextXus HumanCodex Federation &middot; Free, no account, no tracking. Works offline.</footer>
+</main>
+<script>
+(function(){
+"use strict";
+var UNITS={
+length:{label:"Length",units:[["Millimetres (mm)","mm",0.001],["Centimetres (cm)","cm",0.01],["Metres (m)","m",1],["Kilometres (km)","km",1000],["Inches (in)","in",0.0254],["Feet (ft)","ft",0.3048],["Yards (yd)","yd",0.9144],["Miles (mi)","mi",1609.344]]},
+weight:{label:"Weight",units:[["Grams (g)","g",1],["Kilograms (kg)","kg",1000],["Ounces (oz)","oz",28.349523125],["Pounds (lb)","lb",453.59237]]},
+temperature:{label:"Temperature",units:[["Celsius (°C)","C",null],["Fahrenheit (°F)","F",null],["Kelvin (K)","K",null]]},
+volume:{label:"Volume",units:[["Millilitres (ml)","ml",1],["Litres (l)","l",1000],["Cups (US cup)","cup",236.5882365],["Fluid ounces (fl oz)","floz",29.5735295625],["Gallons (US gal)","gal",3785.411784]]}
+};
+var cat=document.getElementById("category"),amt=document.getElementById("amount"),
+fromEl=document.getElementById("fromUnit"),toEl=document.getElementById("toUnit"),
+result=document.getElementById("result"),swapBtn=document.getElementById("swap");
+function fillSelect(sel,units,selected){
+  sel.innerHTML="";
+  units.forEach(function(u){
+    var o=document.createElement("option");o.value=u[1];o.textContent=u[0];
+    if(u[1]===selected)o.selected=true;sel.appendChild(o);
+  });
+}
+function setCategory(){
+  var c=UNITS[cat.value].units;
+  fillSelect(fromEl,c,c[0][1]);
+  fillSelect(toEl,c,c[1]?c[1][1]:c[0][1]);
+  convert();
+}
+function fmt(n){
+  if(!isFinite(n))return "—";
+  var a=Math.abs(n);
+  if(a!==0&&(a>=1e12||a<1e-6))return n.toExponential(6);
+  return String(Math.round(n*1e10)/1e10);
+}
+function toCelsius(v,u){if(u==="C")return v;if(u==="F")return (v-32)*5/9;return v-273.15;}
+function fromCelsius(v,u){if(u==="C")return v;if(u==="F")return v*9/5+32;return v+273.15;}
+function convert(){
+  var v=parseFloat(amt.value);
+  if(isNaN(v)){result.innerHTML="Enter a number to convert.<small>Use the category and unit boxes above.</small>";return;}
+  var from=fromEl.value,to=toEl.value,catName=UNITS[cat.value].label,out;
+  if(cat.value==="temperature"){
+    out=fromCelsius(toCelsius(v,from),to);
+  }else{
+    var units=UNITS[cat.value].units,f=null,t=null;
+    units.forEach(function(u){if(u[1]===from)f=u[2];if(u[1]===to)t=u[2];});
+    out=v*f/t;
+  }
+  var fromLabel=fromEl.options[fromEl.selectedIndex].textContent,
+      toLabel=toEl.options[toEl.selectedIndex].textContent;
+  result.innerHTML=fmt(v)+" "+fromLabel+" = <strong>"+fmt(out)+" "+toLabel+"</strong><small>"+catName+" conversion</small>";
+}
+cat.addEventListener("change",setCategory);
+amt.addEventListener("input",convert);
+fromEl.addEventListener("change",convert);
+toEl.addEventListener("change",convert);
+swapBtn.addEventListener("click",function(){
+  var tmp=fromEl.value;fromEl.value=toEl.value;toEl.value=tmp;convert();
+});
+setCategory();
+})();
+</script>
+</body>
+</html>

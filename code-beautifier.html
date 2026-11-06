@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="theme-color" content="#0a0a0a"/>
+<title>Code Beautifier — NextXus Tools</title>
+<meta name="description" content="Format JSON and JavaScript in your browser. Nothing leaves your device, no account, no tracking."/>
+<style>
+:root{--bg:#0a0a0a;--panel:#111614;--line:rgba(0,255,136,.22);--text:#e0e0e0;--dim:#a8b3ad;--green:#00ff88;--cyan:#00d4ff;--red:#ff6b6b}
+*{box-sizing:border-box}
+html{font-size:112.5%}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;line-height:1.65;background-image:radial-gradient(circle at 15% 0%,rgba(0,255,136,.07),transparent 45%),radial-gradient(circle at 85% 100%,rgba(0,212,255,.07),transparent 45%);background-attachment:fixed}
+a{color:var(--cyan)}
+a:hover,a:focus{color:var(--green)}
+main{max-width:900px;margin:0 auto;padding:28px 20px 40px}
+.back{display:inline-block;margin-bottom:18px;font-size:1.05rem}
+.eyebrow{font-family:'Courier New',monospace;color:var(--cyan);letter-spacing:.2em;text-transform:uppercase;font-size:.85rem;margin:0 0 8px}
+h1{font-size:clamp(2rem,5vw,2.8rem);line-height:1.15;margin:0 0 14px;color:#fff}
+.lead{font-size:1.2rem;max-width:820px}
+.note{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--cyan);border-radius:8px;padding:14px 16px;margin:18px 0}
+.note p{margin:4px 0}
+label{display:block;font-weight:700;margin:18px 0 6px;font-size:1.1rem}
+textarea{width:100%;min-height:220px;background:#050806;color:#c8ffe6;border:1px solid var(--line);border-radius:8px;padding:14px;font-family:'Courier New',monospace;font-size:1rem;line-height:1.5;resize:vertical}
+textarea:focus{outline:2px solid var(--green);outline-offset:2px}
+.buttons{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0}
+button{background:var(--green);color:#000;font-weight:700;font-size:1.05rem;border:none;border-radius:6px;padding:12px 22px;cursor:pointer}
+button:hover,button:focus{background:var(--cyan)}
+button.alt{background:transparent;color:var(--cyan);border:1px solid var(--cyan)}
+button.alt:hover,button.alt:focus{background:var(--cyan);color:#000}
+#msg{font-size:1.1rem;min-height:1.6em;margin:8px 0}
+#msg.error{color:var(--red);font-weight:700}
+#msg.ok{color:var(--green);font-weight:700}
+footer{border-top:1px solid var(--line);margin-top:40px;padding:20px 0;color:var(--dim)}
+</style>
+</head>
+<body>
+<main>
+<p><a class="back" href="https://keywebco.github.io/nextxus-tools/">&larr; Back to Tools</a></p>
+<p class="eyebrow">NextXus Tools &middot; Free &middot; Runs in your browser</p>
+<h1>Code Beautifier</h1>
+<p class="lead">Paste JSON or JavaScript below and format it into readable, indented code. Everything runs on your own device — nothing is sent anywhere, no account, no tracking.</p>
+<div class="note">
+<p><strong>Please note:</strong> JavaScript formatting here is a simple indenter, not a full formatter. It adjusts indentation for braces and brackets. It does not rewrite your code, fix errors, or understand every JavaScript feature.</p>
+</div>
+
+<label for="input">Your code</label>
+<textarea id="input" placeholder='Paste JSON or JavaScript here. Example JSON: {"name":"Roger","tools":3}' spellcheck="false"></textarea>
+
+<div class="buttons">
+<button type="button" id="btnJson">Format JSON</button>
+<button type="button" id="btnJs">Format JavaScript</button>
+<button type="button" id="btnCopy" class="alt">Copy result</button>
+<button type="button" id="btnClear" class="alt">Clear</button>
+</div>
+
+<p id="msg" role="status" aria-live="polite"></p>
+
+<label for="output">Formatted result</label>
+<textarea id="output" readonly placeholder="Your formatted code will appear here." spellcheck="false"></textarea>
+
+<footer>
+<p>NextXus HumanCodex Federation &middot; Plain HTML, no tracking, no cookies. Works offline.</p>
+</footer>
+</main>
+<script>
+(function(){
+"use strict";
+var input=document.getElementById("input");
+var output=document.getElementById("output");
+var msg=document.getElementById("msg");
+function show(text,isError){
+  msg.textContent=text;
+  msg.className=isError?"error":"ok";
+}
+function clearMsg(){msg.textContent="";msg.className="";}
+
+document.getElementById("btnJson").addEventListener("click",function(){
+  var text=input.value.trim();
+  if(!text){show("Paste some JSON first.",true);output.value="";return;}
+  try{
+    var parsed=JSON.parse(text);
+    output.value=JSON.stringify(parsed,null,2);
+    show("JSON formatted.",false);
+  }catch(e){
+    output.value="";
+    show("That is not valid JSON: "+e.message,true);
+  }
+});
+
+function indentJs(code){
+  // Simple safe indenter: no eval, no external library.
+  // Line-based, brace-depth only. Parentheses and square brackets
+  // are left alone, so if(true){...} and arrays stay on one line.
+  // Braces inside strings, template literals, and comments are ignored.
+  // Pre-pass: break minified single-line code at braces and
+  // semicolons (outside strings/comments), so one-line input
+  // gets real line breaks before the brace-depth indenter runs.
+  var broken="",i2=0,s1=false,d1=false,t1=false,bc1=false,lc1=false,esc1=false;
+  while(i2<code.length){
+    var c=code[i2],n=code[i2+1]||"";
+    if(lc1){broken+=c;if(c==="\n"){lc1=false;}i2++;continue;}
+    if(bc1){broken+=c;if(c==="*"&&n==="/"){broken+=n;bc1=false;i2+=2;continue;}i2++;continue;}
+    if(s1||d1||t1){
+      broken+=c;
+      if(esc1){esc1=false;}
+      else if(c==="\\"){esc1=true;}
+      else if(s1&&c==="'"){s1=false;}
+      else if(d1&&c==='"'){d1=false;}
+      else if(t1&&c==="`"){t1=false;}
+      i2++;continue;
+    }
+    if(c==="/"&&n==="/"){lc1=true;broken+=c;i2++;continue;}
+    if(c==="/"&&n==="*"){bc1=true;broken+=c;i2++;continue;}
+    if(c==="'"){s1=true;broken+=c;i2++;continue;}
+    if(c==='"'){d1=true;broken+=c;i2++;continue;}
+    if(c==="`"){t1=true;broken+=c;i2++;continue;}
+    if((c===";"||c===",")&&broken.endsWith("\n")&&/\}[ \t]*$/.test(broken.slice(0,-1))){
+      // A ; or , right after a closing brace belongs on that brace's line (}; or },).
+      broken=broken.slice(0,-1)+c+"\n";i2++;continue;
+    }
+    if(c===";"){broken+=c+"\n";i2++;continue;}
+    if(c==="}"||c==="{"){
+      if(c==="}"){broken+="\n"+c+"\n";}
+      else{broken+=c+"\n";}
+      i2++;continue;
+    }
+    broken+=c;i2++;
+  }
+  var lines=broken.split(/\r\n|\r|\n/);
+  var out=[];
+  var depth=0;
+  var inSingle=false,inDouble=false,inTemplate=false,inBlockComment=false,escaped=false;
+  function netBraces(line){
+    // Count { minus } outside strings/comments. State (inTemplate,
+    // inBlockComment, inSingle, inDouble) carries across lines.
+    var net=0,i=0;
+    while(i<line.length){
+      var ch=line[i],next=line[i+1]||"";
+      if(inBlockComment){
+        if(ch==="*"&&next==="/"){inBlockComment=false;i+=2;continue;}
+        i++;continue;
+      }
+      if(inSingle||inDouble||inTemplate){
+        if(escaped){escaped=false;}
+        else if(ch==="\\"){escaped=true;}
+        else if(inSingle&&ch==="'"){inSingle=false;}
+        else if(inDouble&&ch==='"'){inDouble=false;}
+        else if(inTemplate&&ch==="`"){inTemplate=false;}
+        i++;continue;
+      }
+      if(ch==="/"&&next==="*"){inBlockComment=true;i+=2;continue;}
+      if(ch==="/"&&next==="/"){break;}
+      if(ch==="'"){inSingle=true;i++;continue;}
+      if(ch==='"'){inDouble=true;i++;continue;}
+      if(ch==="`"){inTemplate=true;i++;continue;}
+      if(ch==="{"){net++;}
+      else if(ch==="}"){net--;}
+      i++;
+    }
+    return net;
+  }
+  for(var k=0;k<lines.length;k++){
+    var raw=lines[k];
+    var trimmed=raw.trim();
+    if(trimmed===""){
+      if(inTemplate){out.push(raw);} // keep blank lines inside template literals
+      continue;
+    }
+    if(inTemplate){out.push(raw);netBraces(raw);continue;}
+    var startsClose=/^\}/.test(trimmed);
+    var level=startsClose?Math.max(0,depth-1):depth;
+    out.push("  ".repeat(level)+trimmed);
+    depth=Math.max(0,depth+netBraces(trimmed));
+  }
+  return out.join("\n");
+}
+
+document.getElementById("btnJs").addEventListener("click",function(){
+  var text=input.value.trim();
+  if(!text){show("Paste some JavaScript first.",true);output.value="";return;}
+  output.value=indentJs(text);
+  show("JavaScript indented. Remember: this is a simple indenter, not a full formatter.",false);
+});
+
+document.getElementById("btnCopy").addEventListener("click",function(){
+  if(!output.value){show("Nothing to copy yet — format some code first.",true);return;}
+  function done(){show("Result copied.",false);}
+  function fail(){show("Copy did not work in this browser. Select the result and copy it by hand.",true);}
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(output.value).then(done,fail);
+  }else{
+    output.select();
+    try{document.execCommand("copy");done();}catch(e){fail();}
+  }
+});
+
+document.getElementById("btnClear").addEventListener("click",function(){
+  input.value="";output.value="";clearMsg();input.focus();
+});
+})();
+</script>
+</body>
+</html>

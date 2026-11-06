@@ -111,3 +111,8 @@ work is not lost.
   text tools, calculators, unit converter, color picker, code
   beautifier, randomizer. DeepAI does not cover these.
 - Batch 3: floating menu widget — still needs Roger's mascot decision.
+
+## Batch 2 — everyday utilities (2026-11-06, merged on Roger's approve-all + go-for-it)
+- 7 new client-side utilities, 55 -> 62 cards: text-tools, calculator, unit-converter, color-picker, code-beautifier, randomizer, image-resize. No API key, no server, no spending, nothing uploaded.
+- Cross-links: guides-index + federation-directory (62 tools) in nextxus-free-satellites; player footer in nextxus-music.
+- Still open: Batch 3 floating menu widget (needs Roger's mascot decision); pillar landing-page notes; full Directory re-index.
