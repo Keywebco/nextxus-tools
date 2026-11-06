@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="theme-color" content="#0a0a0a"/>
+<title>Image Resize &amp; Crop — NextXus Tools</title>
+<meta name="description" content="Resize and crop an image in your browser. Your file is never uploaded anywhere."/>
+<style>
+:root{--bg:#0a0a0a;--panel:#111614;--line:rgba(0,255,136,.22);--text:#e0e0e0;--dim:#a8b3ad;--green:#00ff88;--cyan:#00d4ff;--red:#ff6b6b}
+*{box-sizing:border-box}
+html{font-size:112.5%}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;line-height:1.65;background-image:radial-gradient(circle at 15% 0%,rgba(0,255,136,.07),transparent 45%),radial-gradient(circle at 85% 100%,rgba(0,212,255,.07),transparent 45%);background-attachment:fixed}
+a{color:var(--cyan)}
+a:hover,a:focus{color:var(--green)}
+main{max-width:900px;margin:0 auto;padding:28px 20px 40px}
+.back{display:inline-block;margin-bottom:18px;font-size:1.05rem}
+.eyebrow{font-family:'Courier New',monospace;color:var(--cyan);letter-spacing:.2em;text-transform:uppercase;font-size:.85rem;margin:0 0 8px}
+h1{font-size:clamp(2rem,5vw,2.8rem);line-height:1.15;margin:0 0 14px;color:#fff}
+h2{font-size:1.4rem;color:var(--green);margin:32px 0 10px}
+.lead{font-size:1.2rem;max-width:820px}
+.note{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--cyan);border-radius:8px;padding:14px 16px;margin:18px 0}
+.note p{margin:4px 0}
+.note strong{color:#fff}
+fieldset{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px;margin:18px 0}
+legend{color:var(--green);font-weight:700;font-size:1.1rem;padding:0 8px}
+label{display:block;font-weight:700;margin:12px 0 4px}
+label.inline{display:inline;font-weight:400;margin:0}
+input[type="number"],input[type="file"],select{width:100%;max-width:320px;background:#050806;color:var(--text);border:1px solid var(--line);border-radius:6px;padding:10px 12px;font-size:1.05rem;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+input[type="file"]{max-width:none}
+input[type="checkbox"]{width:22px;height:22px;accent-color:var(--green);vertical-align:middle;margin-right:8px}
+input:focus,select:focus{outline:2px solid var(--green);outline-offset:2px}
+.row{display:flex;flex-wrap:wrap;gap:16px}
+.row>div{flex:1;min-width:140px}
+.hint{color:var(--dim);margin:4px 0 0;font-size:1rem}
+.buttons{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0}
+button{background:var(--green);color:#000;font-weight:700;font-size:1.05rem;border:none;border-radius:6px;padding:12px 22px;cursor:pointer}
+button:hover,button:focus{background:var(--cyan)}
+button.alt{background:transparent;color:var(--cyan);border:1px solid var(--cyan)}
+button.alt:hover,button.alt:focus{background:var(--cyan);color:#000}
+button:disabled{opacity:.45;cursor:not-allowed}
+#msg{font-size:1.1rem;min-height:1.6em;margin:8px 0}
+#msg.error{color:var(--red);font-weight:700}
+#msg.ok{color:var(--green);font-weight:700}
+#info{color:var(--dim);font-size:1.05rem}
+#info strong{color:var(--cyan)}
+#previewWrap{margin-top:12px}
+canvas{max-width:100%;height:auto;background:#050806;border:1px solid var(--line);border-radius:8px;display:block}
+footer{border-top:1px solid var(--line);margin-top:40px;padding:20px 0;color:var(--dim)}
+</style>
+</head>
+<body>
+<main>
+<p><a class="back" href="https://keywebco.github.io/nextxus-tools/">&larr; Back to Tools</a></p>
+<p class="eyebrow">NextXus Tools &middot; Free &middot; Runs in your browser</p>
+<h1>Image Resize &amp; Crop</h1>
+<p class="lead">Resize or crop a picture on your own device. Your file is <strong>never uploaded anywhere</strong> — it stays in your browser, and nothing is sent to any server.</p>
+<div class="note">
+<p><strong>Private by design:</strong> choose a file below and it is drawn straight onto a canvas in this page. No upload, no account, no tracking. Works offline.</p>
+</div>
+
+<h2>1. Choose an image</h2>
+<label for="file">Image file (PNG, JPEG, GIF, WebP, and other browser image types)</label>
+<input type="file" id="file" accept="image/*"/>
+<p id="msg" role="status" aria-live="polite"></p>
+<p id="info">No image loaded yet.</p>
+<div id="previewWrap">
+<canvas id="canvas" width="640" height="360" aria-label="Image preview"></canvas>
+</div>
+
+<h2>2. Resize</h2>
+<fieldset>
+<legend>New size</legend>
+<div class="row">
+<div>
+<label for="width">Width (pixels)</label>
+<input type="number" id="width" min="1" max="8000" step="1" placeholder="e.g. 800"/>
+</div>
+<div>
+<label for="height">Height (pixels)</label>
+<input type="number" id="height" min="1" max="8000" step="1" placeholder="e.g. 600"/>
+</div>
+</div>
+<p><label class="inline"><input type="checkbox" id="keepAspect" checked/> Keep aspect ratio (change one side and the other follows)</label></p>
+<div class="buttons">
+<button type="button" id="btnResize" disabled>Resize image</button>
+<button type="button" id="btnReset" class="alt" disabled>Back to original size</button>
+</div>
+<p class="hint">Resize keeps the whole picture — it just makes it bigger or smaller.</p>
+</fieldset>
+
+<h2>3. Crop</h2>
+<fieldset>
+<legend>Crop area</legend>
+<p class="hint">Enter the top-left corner (x, y) and the size of the piece you want to keep. All numbers are in pixels, measured from the top-left corner of the current image.</p>
+<div class="row">
+<div>
+<label for="cropX">Left (x)</label>
+<input type="number" id="cropX" min="0" step="1" value="0"/>
+</div>
+<div>
+<label for="cropY">Top (y)</label>
+<input type="number" id="cropY" min="0" step="1" value="0"/>
+</div>
+<div>
+<label for="cropW">Crop width</label>
+<input type="number" id="cropW" min="1" step="1" placeholder="e.g. 400"/>
+</div>
+<div>
+<label for="cropH">Crop height</label>
+<input type="number" id="cropH" min="1" step="1" placeholder="e.g. 300"/>
+</div>
+</div>
+<div class="buttons">
+<button type="button" id="btnCrop" disabled>Crop image</button>
+</div>
+<p class="hint">Crop cuts the picture down to just that rectangle. The rest is discarded.</p>
+</fieldset>
+
+<h2>4. Download the result</h2>
+<fieldset>
+<legend>Save</legend>
+<div class="row">
+<div>
+<label for="format">File type</label>
+<select id="format">
+<option value="image/png">PNG</option>
+<option value="image/jpeg">JPEG</option>
+</select>
+</div>
+<div>
+<label for="quality">JPEG quality (PNG ignores this)</label>
+<select id="quality">
+<option value="0.92">High (92%)</option>
+<option value="0.8">Medium (80%)</option>
+<option value="0.65">Smaller file (65%)</option>
+</select>
+</div>
+</div>
+<div class="buttons">
+<button type="button" id="btnDownload" disabled>Download result</button>
+</div>
+<p class="hint">The download is made from the canvas in your browser — again, nothing is uploaded.</p>
+</fieldset>
+
+<footer>
+<p>NextXus HumanCodex Federation &middot; Plain HTML, no tracking, no cookies. Works offline.</p>
+</footer>
+</main>
+<script>
+(function(){
+"use strict";
+var fileInput=document.getElementById("file");
+var canvas=document.getElementById("canvas");
+var ctx=canvas.getContext("2d");
+var msg=document.getElementById("msg");
+var info=document.getElementById("info");
+var widthInput=document.getElementById("width");
+var heightInput=document.getElementById("height");
+var keepAspect=document.getElementById("keepAspect");
+var cropX=document.getElementById("cropX");
+var cropY=document.getElementById("cropY");
+var cropW=document.getElementById("cropW");
+var cropH=document.getElementById("cropH");
+var btnResize=document.getElementById("btnResize");
+var btnReset=document.getElementById("btnReset");
+var btnCrop=document.getElementById("btnCrop");
+var btnDownload=document.getElementById("btnDownload");
+var formatSel=document.getElementById("format");
+var qualitySel=document.getElementById("quality");
+var img=null;         // loaded Image object (original)
+var origW=0, origH=0; // original dimensions
+var objectUrl=null;
+
+function show(text,isError){
+  msg.textContent=text;
+  msg.className=isError?"error":"ok";
+}
+function updateInfo(){
+  info.innerHTML="Original: <strong>"+origW+" &times; "+origH+" px</strong> &nbsp;|&nbsp; Current: <strong>"+canvas.width+" &times; "+canvas.height+" px</strong>";
+}
+function enableButtons(on){
+  btnResize.disabled=!on;btnReset.disabled=!on;btnCrop.disabled=!on;btnDownload.disabled=!on;
+}
+function drawImageToCanvas(source,sx,sy,sw,sh,dw,dh){
+  canvas.width=dw;canvas.height=dh;
+  ctx.clearRect(0,0,dw,dh);
+  ctx.drawImage(source,sx,sy,sw,sh,0,0,dw,dh);
+}
+function syncSizeInputs(){
+  widthInput.value=canvas.width;
+  heightInput.value=canvas.height;
+  cropW.value=canvas.width;
+  cropH.value=canvas.height;
+  cropX.value=0;cropY.value=0;
+}
+
+fileInput.addEventListener("change",function(){
+  var file=fileInput.files&&fileInput.files[0];
+  if(!file){return;}
+  if(!file.type||file.type.indexOf("image/")!==0){
+    show("That file is not an image. Please choose an image file (PNG, JPEG, GIF, WebP, or similar).",true);
+    info.textContent="No image loaded yet.";
+    fileInput.value="";
+    return;
+  }
+  if(objectUrl){URL.revokeObjectURL(objectUrl);objectUrl=null;}
+  objectUrl=URL.createObjectURL(file);
+  var newImg=new Image();
+  newImg.onload=function(){
+    img=newImg;origW=newImg.naturalWidth;origH=newImg.naturalHeight;
+    drawImageToCanvas(newImg,0,0,origW,origH,origW,origH);
+    syncSizeInputs();updateInfo();enableButtons(true);
+    show("Loaded “"+file.name+"” ("+origW+" × "+origH+" px). It stays on your device — nothing was uploaded.",false);
+  };
+  newImg.onerror=function(){
+    show("That file could not be read as an image. Please choose a different image file.",true);
+    info.textContent="No image loaded yet.";
+    fileInput.value="";
+  };
+  newImg.src=objectUrl;
+});
+
+// Keep-aspect-ratio: editing one side updates the other from the current image ratio.
+widthInput.addEventListener("input",function(){
+  if(!keepAspect.checked||!img)return;
+  var w=parseInt(widthInput.value,10);
+  if(w>0){heightInput.value=Math.max(1,Math.round(w*canvas.height/canvas.width));}
+});
+heightInput.addEventListener("input",function(){
+  if(!keepAspect.checked||!img)return;
+  var h=parseInt(heightInput.value,10);
+  if(h>0){widthInput.value=Math.max(1,Math.round(h*canvas.width/canvas.height));}
+});
+
+btnResize.addEventListener("click",function(){
+  if(!img){show("Choose an image first.",true);return;}
+  var w=parseInt(widthInput.value,10);
+  var h=parseInt(heightInput.value,10);
+  if(!(w>0)||!(h>0)||w>8000||h>8000){
+    show("Enter a width and height between 1 and 8000 pixels.",true);return;
+  }
+  // Draw from the current canvas so resize works after a crop too.
+  var tmp=document.createElement("canvas");
+  tmp.width=canvas.width;tmp.height=canvas.height;
+  tmp.getContext("2d").drawImage(canvas,0,0);
+  drawImageToCanvas(tmp,0,0,tmp.width,tmp.height,w,h);
+  syncSizeInputs();updateInfo();
+  show("Resized to "+w+" × "+h+" px.",false);
+});
+
+btnReset.addEventListener("click",function(){
+  if(!img){show("Choose an image first.",true);return;}
+  drawImageToCanvas(img,0,0,origW,origH,origW,origH);
+  syncSizeInputs();updateInfo();
+  show("Back to the original size ("+origW+" × "+origH+" px).",false);
+});
+
+btnCrop.addEventListener("click",function(){
+  if(!img){show("Choose an image first.",true);return;}
+  var x=parseInt(cropX.value,10)||0;
+  var y=parseInt(cropY.value,10)||0;
+  var w=parseInt(cropW.value,10);
+  var h=parseInt(cropH.value,10);
+  if(!(w>0)||!(h>0)){
+    show("Enter a crop width and height of at least 1 pixel.",true);return;
+  }
+  if(x<0||y<0||x>=canvas.width||y>=canvas.height){
+    show("The crop start (x, y) must be inside the current image ("+canvas.width+" × "+canvas.height+" px).",true);return;
+  }
+  if(x+w>canvas.width||y+h>canvas.height){
+    show("That crop runs past the edge of the image. Use a smaller width/height, or move x/y so x + width is at most "+canvas.width+" and y + height is at most "+canvas.height+".",true);return;
+  }
+  var tmp=document.createElement("canvas");
+  tmp.width=canvas.width;tmp.height=canvas.height;
+  tmp.getContext("2d").drawImage(canvas,0,0);
+  drawImageToCanvas(tmp,x,y,w,h,w,h);
+  syncSizeInputs();updateInfo();
+  show("Cropped to "+w+" × "+h+" px (from x="+x+", y="+y+").",false);
+});
+
+btnDownload.addEventListener("click",function(){
+  if(!img){show("Choose an image first.",true);return;}
+  var type=formatSel.value;
+  var ext=type==="image/jpeg"?"jpg":"png";
+  var filename="nextxus-image-"+canvas.width+"x"+canvas.height+"."+ext;
+  function saveBlob(blob){
+    if(!blob){show("The download could not be made. Try PNG instead.",true);return;}
+    var url=URL.createObjectURL(blob);
+    var a=document.createElement("a");
+    a.href=url;a.download=filename;
+    document.body.appendChild(a);a.click();a.remove();
+    setTimeout(function(){URL.revokeObjectURL(url);},1000);
+    show("Downloaded "+filename+".",false);
+  }
+  if(canvas.toBlob){
+    if(type==="image/jpeg"){canvas.toBlob(saveBlob,type,parseFloat(qualitySel.value));}
+    else{canvas.toBlob(saveBlob,type);}
+  }else{
+    // Older browsers: fall back to a data URL.
+    var a=document.createElement("a");
+    a.href=type==="image/jpeg"?canvas.toDataURL(type,parseFloat(qualitySel.value)):canvas.toDataURL(type);
+    a.download=filename;
+    document.body.appendChild(a);a.click();a.remove();
+    show("Downloaded "+filename+".",false);
+  }
+});
+
+// Blank placeholder so the canvas is not empty before a file is chosen.
+ctx.fillStyle="#050806";ctx.fillRect(0,0,canvas.width,canvas.height);
+ctx.fillStyle="#a8b3ad";ctx.font="20px system-ui, sans-serif";ctx.textAlign="center";
+ctx.fillText("Your image preview will appear here.",canvas.width/2,canvas.height/2);
+})();
+</script>
+</body>
+</html>
