@@ -1,0 +1,25 @@
+# Roger SIM — Memory Log Template
+# Use this structure to record interactions, corrections, procedures, and experiences
+# from any location. Append new records; never overwrite history.
+# Version: 1.0 — 2026-11-03
+
+metadata:
+  name: "Roger SIM Memory Log"
+  parent: "roger-sim-mind.yaml"
+  schema: "memory-loop-schema.yaml"
+  purpose: "Multi-location continuity for the SIM’s own database"
+
+records: []
+# Example record (copy and fill):
+# - id: "mem-2026-11-03-001"
+#   timestamp: "2026-11-03T20:00:00Z"
+#   location_or_session: "nextxus.tech / chat"
+#   type: "interaction"   # interaction | correction | observation | learning | procedure | experience | user_analysis
+#   content: "User asked about X. SIM answered with correct answer first, then related observation."
+#   evidence_class: "inference"   # fact | testimony | inference | assumption | hypothesis | interpretation | unresolved
+#   provenance: "session transcript"
+#   sensitivity: "private"   # public | private | restricted
+#   shared_to_federation: false
+#   notes: "Verified by Agent Zero before storage."
+
+# New records are added below. Agent Zero (subconscious) verifies before final storage.

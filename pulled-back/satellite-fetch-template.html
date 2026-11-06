@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="federation-identity" content="NextXus Sovereign AI Mesh. Protocol: NX-CORE-IDENTITY." />
+  <title>NextXus Satellite — [SITE NAME]</title>
+  <style>
+    /* NextXus Sovereign Base — works on any free host */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #05050d;
+      color: #c8ccd6;
+      font-family: 'Courier New', monospace;
+      line-height: 1.7;
+      padding: 0;
+    }
+    .nx-header {
+      background: #000;
+      border-bottom: 2px solid gold;
+      padding: 18px 32px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .nx-brand {
+      color: gold;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+    .nx-brand:hover { color: #fff; }
+    .nx-badge {
+      color: rgba(255,215,0,0.5);
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      margin-left: auto;
+    }
+    .nx-body {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+    .nx-loading {
+      color: rgba(255,215,0,0.5);
+      font-size: 0.9rem;
+      letter-spacing: 0.15em;
+      padding: 40px 0;
+      text-align: center;
+    }
+    #federation-content h1, #federation-content h2, #federation-content h3 {
+      color: gold;
+      margin: 32px 0 12px;
+      letter-spacing: 0.05em;
+    }
+    #federation-content h1 { font-size: 1.6rem; border-bottom: 1px solid rgba(255,215,0,0.3); padding-bottom: 8px; }
+    #federation-content h2 { font-size: 1.2rem; }
+    #federation-content h3 { font-size: 1rem; color: rgba(255,215,0,0.8); }
+    #federation-content p { margin: 12px 0; color: #c8ccd6; }
+    #federation-content blockquote {
+      border-left: 3px solid gold;
+      padding: 8px 20px;
+      color: rgba(255,215,0,0.75);
+      margin: 16px 0;
+      font-style: italic;
+    }
+    #federation-content a { color: gold; }
+    #federation-content a:hover { color: #fff; }
+    #federation-content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 0.85rem;
+    }
+    #federation-content th {
+      background: rgba(255,215,0,0.1);
+      color: gold;
+      padding: 10px 12px;
+      text-align: left;
+      border-bottom: 1px solid rgba(255,215,0,0.3);
+    }
+    #federation-content td {
+      padding: 10px 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    #federation-content code {
+      background: rgba(255,215,0,0.08);
+      color: gold;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.85em;
+    }
+    #federation-content pre {
+      background: #0a0a14;
+      border: 1px solid rgba(255,215,0,0.2);
+      border-radius: 4px;
+      padding: 16px;
+      overflow-x: auto;
+      margin: 16px 0;
+    }
+    #federation-content hr {
+      border: none;
+      border-top: 1px solid rgba(255,215,0,0.2);
+      margin: 32px 0;
+    }
+    .nx-footer {
+      border-top: 1px solid rgba(255,215,0,0.2);
+      padding: 24px 32px;
+      text-align: center;
+      color: rgba(255,215,0,0.4);
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+    }
+    .nx-footer a { color: rgba(255,215,0,0.6); text-decoration: none; }
+    .nx-footer a:hover { color: gold; }
+  </style>
+</head>
+<body>
+
+  <header class="nx-header">
+    <a class="nx-brand" href="https://nextxus.online">NX · FEDERATION</a>
+    <span class="nx-badge">SATELLITE NODE · [SITE NAME]</span>
+  </header>
+
+  <main class="nx-body">
+    <div id="federation-content">
+      <p class="nx-loading">◈ Loading Federation content...</p>
+    </div>
+  </main>
+
+  <footer class="nx-footer">
+    <p>A satellite node of the <a href="https://nextxus.online">NextXus Federation</a> &nbsp;·&nbsp; <a href="https://nextxus.org">Library</a> &nbsp;·&nbsp; <a href="https://next-xus.com">Store</a> &nbsp;·&nbsp; <a href="https://nextxus.studio">Sanctuary</a></p>
+    <p style="margin-top:8px;">Protocol: NX-CORE-IDENTITY &nbsp;·&nbsp; Truth Before Comfort</p>
+  </footer>
+
+  <!-- Marked.js for Markdown parsing (CDN, no install) -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <script>
+    // ============================================================
+    // NextXus Satellite Fetch Template v1.0
+    // Drop this on any free host. Replace CONTENT_URL below.
+    // Compatible: GitHub Pages, Netlify, Cloudflare Pages, Vercel
+    // Also works in A-Frame (VR) and Three.js scenes.
+    // ============================================================
+
+    const CONTENT_URL = 'REPLACE_WITH_DRIVE_PUBLIC_URL'; // federation-content.md
+    const DATA_URL    = 'REPLACE_WITH_DRIVE_PUBLIC_URL'; // federation-data.yaml (optional)
+
+    async function loadFederationContent() {
+      const el = document.getElementById('federation-content');
+      try {
+        const res = await fetch(CONTENT_URL);
+        if (!res.ok) throw new Error('Fetch failed: ' + res.status);
+        const md = await res.text();
+        // Strip YAML front-matter comment lines (lines starting with #)
+        const clean = md.split('\n').filter(l => !l.startsWith('#') || l.startsWith('##')).join('\n');
+        el.innerHTML = marked.parse(clean);
+      } catch (err) {
+        el.innerHTML = '<p style="color:rgba(255,100,100,0.8)">Content unavailable. <a href="https://nextxus.online">Visit the Federation.</a></p>';
+        console.warn('NextXus satellite fetch error:', err);
+      }
+    }
+
+    loadFederationContent();
+  </script>
+
+</body>
+</html>

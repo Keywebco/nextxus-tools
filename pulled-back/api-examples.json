@@ -1,0 +1,21 @@
+{
+  "evolve_request": {
+    "strategy": "promote",
+    "target_id": "lib:humancodex-core"
+  },
+  "repair_request": {
+    "issue_type": "broken_link",
+    "target_id": "lib:nextxus-governance"
+  },
+  "search_request": {
+    "domain": "governance",
+    "q": "governance ethics"
+  },
+  "synthesis_request": {
+    "source_ids": [
+      "lib:humancodex-core",
+      "lib:nextxus-governance",
+      "lib:ai-architecture"
+    ]
+  }
+}
