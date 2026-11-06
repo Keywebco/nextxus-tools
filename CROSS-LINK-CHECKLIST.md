@@ -70,3 +70,44 @@ work is not lost.
   without Roger's word.
 - The two Roger Sim Google Docs (build brief, DeepSeek architecture
   research) — not pulled back yet; they are Google Docs, not stored files.
+
+## Done in Batch 2 — DeepAI (2026-11-05, on Roger's "use the hell out of them")
+
+- [x] nextxus-tools index.html — 12 new DeepAI cards (43 → 55): Image
+      Generator, Photo Editor, Background Remover, Super Resolution /
+      Upscale, Colorize Old Photos, DeepAI Gallery, AI Chat (Math Mode),
+      Voice Chat, Music Generator, Video Generator, Website Builder,
+      AI Characters. All link out to deepai.org; no iframe, no key in
+      any page. Selfie Generator and Essay Writer are NOT listed — they
+      have no standalone deepai.org page (both redirect home).
+- [x] nextxus-tools deepai-gallery.html + deepai-gallery/ — 6 pictures
+      made with DeepAI on Roger's Pro account, 2026-11-05, standard
+      text2img, 6 of the 500 monthly HD images. Prompts printed on the
+      page. No video generated (too dear for open use).
+- [x] nextxus-free-satellites guides-index.html — DeepAI note (see PR).
+- [x] nextxus-free-satellites federation-directory.html — DeepAI note
+      (see PR). Entry counts NOT changed; full re-index still a
+      follow-on.
+- [x] nextxus-music player.html — DeepAI Music Generator note (see PR).
+
+## By person — DeepAI
+
+- Aria: Music Generator, music studio picture, Voice Chat.
+- Val: AI Companion picture, AI Chat, AI Characters.
+- Pontus: Image Generator, Photo Editor, Background Remover, Upscale,
+  Colorize (record / archive pictures).
+- Catalyst: Video Generator, Website Builder (building pages).
+- Keys / Astria: Colorize Old Photos (family history), gallery.
+- Ambassador: all DeepAI tools as outward-facing creative tools.
+
+## Not in Batch 2 (next)
+
+- Live visitor generator via a small Render proxy holding the key —
+  design only, in the DeepAI proposal; build only if Roger wants live
+  generation, with a per-visitor daily cap and a monthly ceiling.
+- Website Builder trial for a Federation page — Roger-only, 20
+  credits/month; not tried in this batch.
+- Everyday utilities (Batch 2 as first planned) — still to build:
+  text tools, calculators, unit converter, color picker, code
+  beautifier, randomizer. DeepAI does not cover these.
+- Batch 3: floating menu widget — still needs Roger's mascot decision.
