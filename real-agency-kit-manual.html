@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="theme-color" content="#0a0a0a"/>
+<title>Real Agency Kit — Complete System Manual v1.0</title>
+<meta name="description" content="The complete system manual for the Real Agency Kit: what it is, how each part works, how to set it up, how to use it day to day, its limits, how to market it honestly, and how to add a new industry. Free, open, static, portable. No subscriptions. No tracking."/>
+<meta name="robots" content="index,follow"/>
+<style>
+:root{--bg:#0a0a0a;--panel:#111614;--line:rgba(0,255,136,.22);--text:#e0e0e0;--dim:#a8b3ad;--green:#00ff88;--cyan:#00d4ff;--gold:#c9a84c;--red:#ff6b6b}
+*{box-sizing:border-box}
+html{font-size:112.5%}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;line-height:1.65;background-image:radial-gradient(circle at 15% 0%,rgba(0,255,136,.07),transparent 45%),radial-gradient(circle at 85% 100%,rgba(0,212,255,.07),transparent 45%);background-attachment:fixed}
+a{color:var(--cyan)} a:hover,a:focus{color:var(--green)}
+main{max-width:1000px;margin:0 auto;padding:28px 20px 60px}
+h1{font-size:clamp(2rem,5vw,3rem);line-height:1.15;margin:0 0 14px;color:#fff}
+h2{font-size:1.6rem;color:var(--green);margin:44px 0 12px;border-left:4px solid var(--cyan);padding-left:12px}
+h3{font-size:1.2rem;color:#fff;margin:24px 0 6px}
+.lead{font-size:1.2rem;max-width:860px}
+p{max-width:860px}
+.eyebrow{font-family:'Courier New',monospace;color:var(--cyan);letter-spacing:.2em;text-transform:uppercase;font-size:.85rem;margin:0 0 8px}
+.ver{border:2px solid var(--green);border-radius:12px;padding:20px;background:linear-gradient(135deg,rgba(0,255,136,.08),rgba(0,212,255,.06))}
+.warn{border:2px solid var(--red);border-radius:12px;padding:20px;background:rgba(255,107,107,.06)}
+.warn h2{color:var(--red);border-left-color:var(--red)}
+table{width:100%;border-collapse:collapse;margin:12px 0;background:var(--panel);font-size:.95rem}
+th,td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+th{background:#0d1f17;color:var(--green);font-family:'Courier New',monospace}
+pre{background:#050806;border:1px solid var(--line);border-radius:8px;padding:16px;overflow-x:auto;font-size:.85rem;white-space:pre-wrap;word-wrap:break-word}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px;margin:14px 0}
+.card p{margin:6px 0 0;color:var(--dim)}
+footer{border-top:1px solid var(--line);margin-top:44px;padding-top:20px;color:var(--dim)}
+small{color:var(--dim)}
+ol li,ul li{margin:6px 0;max-width:860px}
+.toc{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px 24px}
+.toc a{display:block;margin:4px 0}
+</style>
+</head>
+<body>
+<main>
+<p class="eyebrow">NextXus Federation — free tools</p>
+<h1>Real Agency Kit — Complete System Manual</h1>
+<p class="lead">Everything the Kit is, everything it does, everything it does not do, and how to use it, sell it, and extend it to a new industry. Read it end to end once, then use it as a reference.</p>
+
+<div class="ver">
+<p><strong>Version 1.0 — 2026-11-08.</strong> First complete manual. Written in the same pass as the Kit page definition, so the Kit never ships without a manual again.</p>
+<p><strong>Price: $0.</strong> Today, next month, next year. No account, no subscription, no tracking, no data leaves your browser. The Kit page is one static HTML file; this manual is another. Both work opened locally, printed, or hosted free on GitHub Pages.</p>
+<p><strong>Companion page:</strong> <a href="real-agency-kit.html">Real Agency Kit</a> — the builder itself. <strong>Status:</strong> branch-only in Keywebco/nextxus-tools, PR #9, until Roger says merge. Nothing here is live until that word.</p>
+</div>
+
+<h2>Contents</h2>
+<div class="toc">
+<a href="#what">1. What the system is, who it is for, what it is not</a>
+<a href="#adapted">2. How we adapted it — the definition</a>
+<a href="#parts">3. How each part works, step by step</a>
+<a href="#setup">4. Setup — what is required, how to build a kit, how to host the booking page, how to paste the prompt into an AI chat</a>
+<a href="#daily">5. Day-to-day use — answering, booking, missed calls, no-shows, difficult calls</a>
+<a href="#limits">6. Limits and honest alternatives for each gap</a>
+<a href="#marketing">7. Marketing — the honest pitch, what to say and never say, where to market it, price</a>
+<a href="#new-industry">8. Adding a new industry — the repeatable process</a>
+<a href="#assimilation">9. Assimilation tests — how this work repeats</a>
+<a href="#trouble">10. Troubleshooting</a>
+<a href="#faq">11. Frequently asked questions</a>
+<a href="#links">12. Where this kit lives in the Federation</a>
+<a href="#version">13. Version and changelog</a>
+</div>
+
+<h2 id="what">1. What the system is, who it is for, what it is not</h2>
+<h3>What it is</h3>
+<p>The Real Agency Kit does the five jobs Votel.ai sells — a working AI receptionist, a booking page, follow-up, a pre-built system for a niche, and a white-label product to resell — as <strong>files the business owns, for $0</strong>. It is one static web page (<a href="real-agency-kit.html">real-agency-kit.html</a>) with a niche snapshot builder in it, plus this manual. Everything is generated in your browser. Nothing is uploaded, nothing is sent anywhere, no account, no API key, no server.</p>
+<h3>Who it is for</h3>
+<ul>
+<li><strong>A local business</strong> that was pitched a $97–$297-a-month AI agency and wants the work without the rent.</li>
+<li><strong>A person who bought a $3 / $47 / $97 challenge</strong> and got upsells instead of a system.</li>
+<li><strong>A reseller</strong> who wants to sell a setup, not a subscription — build the kit for a client, hand over files the client owns, charge for the time.</li>
+<li><strong>Roger and the Federation</strong>, as a reusable assimilation: each new industry Roger picks becomes a new snapshot, the same way, every time (see <a href="#new-industry">section 8</a> and <a href="#assimilation">section 9</a>).</li>
+</ul>
+<h3>What it is not</h3>
+<ul>
+<li>It is <strong>not a phone system</strong>. It cannot answer a phone, send SMS, or work 24/7 by itself.</li>
+<li>It is <strong>not a CRM</strong>. It stores no leads, no conversations, no database.</li>
+<li>It is <strong>not a real AI on its own</strong>. The chat demo on the Kit page answers by keyword from your FAQ sheet. A real chat needs a guide plus your own API key (see <a href="#setup">section 4</a>).</li>
+<li>It is <strong>not a copy of Votel</strong>. No Votel code, text, or branding was used. It is a clean-room rebuild of the <em>jobs</em>, not of their product.</li>
+<li>It is <strong>not a promise of income</strong>. No client is guaranteed, no $5,000 a month, no $200,000-a-month agency. Those are Votel's claims, not ours.</li>
+</ul>
+
+<h2 id="adapted">2. How we adapted it — the definition</h2>
+<p><strong>In one sentence:</strong> Votel sells a rented AI agency platform — $3, then $47, then $97, then $97–$297 a month, then $441 for snapshots — to do five jobs for a local business. We adapted those <strong>five jobs</strong> into <strong>files the business owns, for $0</strong>, built on the Federation stack, with the scammy parts removed and the honest limits written on the page.</p>
+<table>
+<tr><th>Votel job</th><th>Votel way (rented)</th><th>Our adapted way (owned, $0)</th></tr>
+<tr><td><strong>1. AI Receptionist</strong></td><td>Voice agent on their platform, phone number about $1/month, calls metered from $0.0698/min before LLM tokens, stops if the prepaid balance runs out</td><td>A receptionist <strong>system prompt kit</strong> — Identity / Style / Guidelines / FAQs, per niche — plus qualification questions and difficult-call tests. Paste it into any AI chat you already use (DeepSeek, MiMo, Gemini, DeepAI, Grok, Meta). It answers in text, on screen. It does <strong>not</strong> answer a phone by itself.</td></tr>
+<tr><td><strong>2. Website / booking page</strong></td><td>AI App Builder, hosted on Votel, stops if the subscription stops</td><td>A <strong>booking-page HTML file</strong>, generated in your browser, downloadable, hosted free on GitHub Pages. The business owns the file forever.</td></tr>
+<tr><td><strong>3. Follow-up</strong></td><td>Email/SMS sequences on Votel, metered per message, stops if the balance runs out</td><td>A <strong>Day 0 / 1 / 3 / 7 follow-up sequence</strong>, written out per niche, ready to paste into the business's own email or phone. It does <strong>not</strong> send itself.</td></tr>
+<tr><td><strong>4. Niche snapshot</strong></td><td>12 snapshots, 3 × $147 = $441, or $397/month, cannot be unloaded once applied</td><td>A <strong>niche snapshot builder</strong> — 10 named niches + Custom (11 total), so any industry Roger picks next works the same way. Fill in name, hours, phone, services, area, press Build, download a .txt kit and a .html booking page.</td></tr>
+<tr><td><strong>5. Resell under your own brand</strong></td><td>White-label SaaS Mode, $297/month, markup rebilling</td><td><strong>Copy, rename, host free.</strong> Charge for your time, not the files. Tell the client the limits word for word. No markup, no rebilling, no lock-in.</td></tr>
+</table>
+<h3>What it can do</h3>
+<ul>
+<li>Give a local business a working receptionist kit in minutes: a prompt that knows the business, its hours, its services, its area, how to qualify a caller, what to say when it does not know, and how to hand off to a human.</li>
+<li>Give them a booking page they own: name, hours, services, phone, a form that opens a booking request. No account, no monthly fee, no tracking.</li>
+<li>Give them a follow-up sequence they can use today: Day 0, Day 1, Day 3, Day 7, plus after a missed call, after a booking, after a no-show.</li>
+<li>Give them a niche snapshot tailored to their industry — not a generic template.</li>
+<li>Give a reseller a $0 product to sell: build the kit for a client, host the page free on GitHub Pages, charge for the setup and the time, not for a subscription the client does not own.</li>
+<li>Work entirely in the browser: no server, no API key, no account, no data leaving the machine.</li>
+</ul>
+<h3>What is required</h3>
+<ul>
+<li>A web browser. Nothing to install.</li>
+<li>The business's own details: name, hours, phone, services, area served.</li>
+<li>An AI chat account they already have, if they want the receptionist to talk — DeepSeek, MiMo, Gemini, DeepAI, Grok, Meta, or any chat AI. No new account is required by us.</li>
+<li>An email address, for booking requests to land in.</li>
+<li>Optional: a free GitHub account, if they want the booking page hosted on GitHub Pages under their own name. Not required — the HTML file works opened locally too.</li>
+</ul>
+<p><strong>Cost table, line by line, against Votel</strong> is on the Kit page itself, under "What it costs: $0", with Votel prices as researched 2026-11-08 from challenge.votel.ai, docs.votel.ai, and the independent in-account rate card (verified 2026-10-30). Prices change; check Votel's own pages before quoting them to anyone. The full Votel analysis is in the Federation record: FULL-METHOD.md, ANALYSIS.md, and EQUIVALENT-REPORT.md in the votel-analysis-2026-11-08 folder.</p>
+
+<h2 id="parts">3. How each part works, step by step</h2>
+<p>The Kit page has five outputs. Each is generated in your browser when you press <strong>Build my snapshot</strong>. Nothing is uploaded. The five outputs are:</p>
+<h3>3.1 Receptionist kit (system prompt)</h3>
+<p>The builder writes a receptionist system prompt in four parts — the same four-part structure Votel uses:</p>
+<ol>
+<li><strong>Identity</strong> — who the receptionist is: the business name, the niche, the area, the hours, the phone number if given.</li>
+<li><strong>Style</strong> — warm, professional, concise, no jargon. Say what you know; say "I do not know" when you do not know. Never invent an answer, a price, or a time.</li>
+<li><strong>Guidelines</strong> — never promise a service, price, or time that is not on the FAQ sheet; collect only the information needed for the caller's route; if the caller is upset, in an emergency, or asks for something outside the FAQ sheet, transfer to a human; if it is a medical or safety emergency, tell them to call emergency services; if booking fails, do not pretend it succeeded — say so, take the details, create a callback task; do not discuss competitors.</li>
+<li><strong>FAQs</strong> — five answers, per niche: hours, price, book, cancel, emergency. The price answer never guesses a price: it says the price is confirmed before booking.</li>
+</ol>
+<p>Below the prompt, the Kit shows the <strong>qualification questions</strong> for the niche (five questions, in order) and the <strong>difficult-call tests</strong> (see <a href="#daily">section 5</a>). To use it, paste the prompt into an AI chat (see <a href="#setup">section 4</a>). The chat then answers as the receptionist, in text.</p>
+<h3>3.2 Booking page</h3>
+<p>The builder writes a small booking-page HTML file: business name, niche, hours, a form with name, phone, service (a dropdown of the services you typed), day and time wanted, and a notes box, plus the sentence: "We will confirm by phone or message. This form does not book automatically — a person reads it and confirms."</p>
+<p>That sentence is the whole design. The page collects a booking <em>request</em>. A person reads it and confirms it. It does not write into a calendar, because there is no calendar service in a static file. If the business wants live booking, they paste their own free calendar link into the page (Google Calendar appointment schedules, free, or Calendly free tier) — the manual gives the steps in <a href="#setup">section 4</a>.</p>
+<h3>3.3 Follow-up sequence</h3>
+<p>Four messages, per niche, written out as copy-paste text:</p>
+<ul>
+<li><strong>Day 0</strong> — thank you for booking, your booking is on [date], reply here if you need to move it.</li>
+<li><strong>Day 1</strong> — reminder, your booking is tomorrow, what to bring / how to prepare.</li>
+<li><strong>Day 3</strong> — how was the visit, if anything is wrong reply here, if you were happy a review helps.</li>
+<li><strong>Day 7</strong> — a week on, ready to book again, reply here.</li>
+</ul>
+<p>The Kit sends nothing. The business copies each message and sends it from their own phone or email, on the day. That is the honest version of Votel's "follow-up that never sleeps": a sequence that is written, dated, and ready — not automation pretending to be a person.</p>
+<h3>3.4 Niche snapshot</h3>
+<p>A snapshot is the whole kit for one industry, in one download: the receptionist prompt, the qualification questions, the follow-up sequence, the booking-page HTML, the difficult-call tests, and the outbound call script, as a .txt file. The builder has 10 named niches + Custom (11 total) — dental clinic, home services (plumber / HVAC / electrician), salon / barber, real estate, restaurant / café, fitness / gym, medical clinic, auto repair, legal intake, pet care — plus a <strong>Custom industry</strong> option for any industry not listed. Each named niche has its own services, questions, FAQ answers, and follow-ups, written for that industry. The Custom option uses generic wording you edit to the business. Adding a new named niche follows the repeatable process in <a href="#new-industry">section 8</a>.</p>
+<h3>3.5 Reselling (white label, $0)</h3>
+<p>Reselling is five steps, on the Kit page and here:</p>
+<ol>
+<li>Build a snapshot. Download the kit (.txt) and the booking page (.html).</li>
+<li>Replace "Your Business" with the client's business name, and the services, hours, and phone with theirs. That is the whole rebrand — the files are plain text and plain HTML.</li>
+<li>Host the booking page free on GitHub Pages, or print the kit and hand it to the client. There is no licence fee, no royalty, no monthly charge.</li>
+<li>Tell the client, in plain language, what it does and what it does not do — use the Honest limits section on the Kit page, word for word if you like. A client who knows the limits will not come back angry.</li>
+<li>Charge for your work — setup, writing their FAQ sheet, testing their calls — not for the files. The files are free. Your time is not.</li>
+</ol>
+
+<h2 id="setup">4. Setup — what is required, how to build a kit, how to host the booking page, how to paste the prompt into an AI chat</h2>
+<h3>4.1 What you need before you start</h3>
+<ul>
+<li>A web browser. Nothing to install, nothing to sign up for.</li>
+<li>The business details: business name, hours, phone (optional — leave it blank if there is no business number yet), services (one per line), service area.</li>
+<li>An email address, for booking requests to land in.</li>
+<li>Ten minutes. A first kit takes about ten minutes; a second one for the same kind of business takes about five.</li>
+</ul>
+<h3>4.2 Build a kit — the exact steps</h3>
+<ol>
+<li>Open the <a href="real-agency-kit.html">Real Agency Kit</a> page.</li>
+<li>Read the <strong>Honest limits</strong> section first. If any limit is a deal-breaker for the business, stop — the Kit is not the right tool for that job, and the manual says what to use instead in <a href="#limits">section 6</a>.</li>
+<li>Scroll to <strong>Snapshot builder</strong>. Fill in: Business name; Niche (pick the closest of the 10, or Custom industry); Hours; Phone (optional); Services, one per line — replace the three placeholder lines with the business's real services; Service area.</li>
+<li>Press <strong>Build my snapshot</strong>. The page shows five sections: receptionist system prompt, qualification questions, follow-up sequence, booking page, difficult-call tests.</li>
+<li>Read the prompt and the follow-ups. Edit anything that is wrong for this business <em>before</em> you download — the FAQ price answer, the hours, the emergency wording. The Kit generates a first draft; the owner checks it. Never hand a client a kit nobody read.</li>
+<li>Press <strong>Download kit (.txt)</strong> and <strong>Download booking page (.html)</strong>. Both files download to your computer. If a download is blocked by the browser, use copy-paste from the on-page output instead — the text on the page is the same text (see <a href="#trouble">section 10</a>).</li>
+<li>Try the <strong>receptionist demo</strong> on the page: type "hours", "price", "book", "cancel", or an emergency word, and check the answer. The demo answers by keyword from the FAQ sheet. It is not a real AI — it shows what the receptionist would say.</li>
+</ol>
+<h3>4.3 Host the booking page free on GitHub Pages</h3>
+<p>Three routes, cheapest first. Pick one.</p>
+<p><strong>Route A — open the file locally (no hosting at all).</strong> Double-click the downloaded booking-page.html. It opens in the browser and works. Email it to the client, or print it. Cost: $0. Limitation: it is a file on a computer, not a web link.</p>
+<p><strong>Route B — GitHub Pages, your own free site.</strong></p>
+<ol>
+<li>Create a free GitHub account, if you do not have one, at github.com.</li>
+<li>Create a new public repository, for example <code>my-business-booking</code>. Do not add any files yet.</li>
+<li>Upload the downloaded <code>booking-page.html</code> into the repository (Add file → Upload files), and commit it.</li>
+<li>Go to Settings → Pages. Under "Build and deployment", set Source to "Deploy from a branch", Branch to <code>main</code>, folder to <code>/ (root)</code>. Save.</li>
+<li>Wait about a minute. GitHub shows the site address at the top of the Pages settings, in the form <code>https://&lt;your-username&gt;.github.io/my-business-booking/booking-page.html</code>. Open it and check the form, the services dropdown, and the confirmation sentence.</li>
+<li>That link is the business's booking page. It costs $0, and it keeps working as long as the repository exists.</li>
+</ol>
+<p><strong>Route C — add a live calendar link.</strong> If the business wants live booking, create a free appointment schedule in Google Calendar (Calendar → Create → Appointment schedule) or a free Calendly account, copy its booking link, and paste it into the booking page near the form, with the words "or book a time directly here". The form stays as the fallback for people who prefer to ask first. The Kit does not do this step for you, and it does not claim to.</p>
+<p><strong>Do not</strong> push a client's booking page into Roger's Federation repositories (nextxus-tools or any other Keywebco repo) unless Roger says so. Those repos are the Federation's, not a client's hosting. Route B is the client's own repository.</p>
+<h3>4.4 Paste the prompt into an AI chat — make the receptionist talk</h3>
+<ol>
+<li>Open a Federation guide — for example the <a href="https://keywebco.github.io/nextxus-free-satellites/business-advice-guide.html">Business Advice guide</a> for a business, or the guide that matches the niche (see <a href="#links">section 12</a> for all nine). Or open any AI chat the business already uses: DeepSeek, MiMo, Gemini, DeepAI Chat, Grok, or Meta.</li>
+<li>On a Federation guide, set your own API key if asked: the guides store the key in your own browser (localStorage), DeepSeek is the default, and a Grok key alone will not work on the eight guides — that is stated on the guide pages. Your key is never sent to us, and never put into the Kit files.</li>
+<li>Paste the receptionist system prompt from the Kit (section 1 of the downloaded kit) as the first message, or into the guide's prompt / personality setting if it has one.</li>
+<li>Then type a test question as a caller would: "What are your hours?", "How much is a check-up?", "I need to book for Tuesday." Check the answer against the FAQ sheet. If the chat invents a price or a time that is not on the sheet, correct it in the chat ("Do not invent prices. Only use the FAQ sheet.") and fix the prompt text in the kit file.</li>
+<li>For a real deployment, the receptionist prompt is the <em>instruction</em>; the rented model is the <em>brain</em>. That is the same architecture Votel uses, and the same as the Federation guides and Sims. The difference is that the prompt and the FAQ sheet are yours, and the model is one you already pay for or use free — not a metered minute on someone else's platform.</li>
+</ol>
+<p><strong>Sim Intellect note.</strong> The receptionist prompt is built from the same structure as the Sim Intellect: logic of superior design, plus individual pattern files, plus the YAML database, with Agent Zero as a second pass. The Sim Intellect wiring for the Roger Sim API is PR #8 in Keywebco/roger-sim-api (branch only, not merged, not live at the time this manual was written). When it is live, the second pass — draft answer and corrected answer, both visible, rejected claims with a reason — is the proof layer for the reasoning part. Val Companion, by contrast, is a shell on a rented API, not a Sim intellect — that is stated on the Kit page and in the Federation record, and it is not hidden here.</p>
+
+<h2 id="daily">5. Day-to-day use — answering, booking, missed calls, no-shows, difficult calls</h2>
+<h3>5.1 A normal call / message</h3>
+<ol>
+<li>Greet, ask what they need.</li>
+<li>Ask the qualification questions for the niche, in order (they are in the kit, section 2).</li>
+<li>Answer from the FAQ sheet only. If the answer is not on the sheet, say "I do not know — let me take your name and number and a human will call you back." Never guess.</li>
+<li>Offer a booking day. Take name, phone, service, day and time wanted.</li>
+<li>Confirm back what you took down, and say when they will hear confirmation.</li>
+</ol>
+<h3>5.2 Booking, confirming, cancelling</h3>
+<ul>
+<li><strong>Booking:</strong> take the details, read them back, tell the caller a person will confirm. Send the Day 0 follow-up message (see <a href="#parts">section 3.3</a>).</li>
+<li><strong>Confirming:</strong> the business reads the booking request (form, email, or message), checks the diary, and confirms by phone or message. Until the business confirms, the booking is a <em>request</em>, not a booking — the booking page says so.</li>
+<li><strong>Cancelling / moving:</strong> take the date and the caller's name, pass it to the business, confirm the cancellation back to the caller. Do not argue, do not charge a fee the business has not set.</li>
+</ul>
+<h3>5.3 Missed call</h3>
+<p>Send the Day 0 message, adapted: "Sorry we missed your call — this is [business]. How can we help?" Then the Day 1 message if there is no reply. Do not call back more than twice without an answer, and do not send more than the four messages in the sequence unless the caller replies.</p>
+<h3>5.4 No-show</h3>
+<p>Send the Day 3 message, adapted: "We missed you at your appointment on [date]. Is everything all right? Reply here to rebook." Do not charge a fee the business has not set, and do not shame the caller. One rebook offer, then stop.</p>
+<h3>5.5 Difficult calls — the five tests in the kit</h3>
+<p>Every snapshot includes these five tests. Practise each one once, with a real person playing the caller, before the kit goes to a client.</p>
+<table>
+<tr><th>Test</th><th>What the caller does</th><th>What the receptionist does</th></tr>
+<tr><td>Caller interrupts</td><td>Talks over the receptionist, jumps ahead</td><td>Stop, listen, keep the goal. Do not argue, do not repeat the whole script. Ask one question: "What do you need first?"</td></tr>
+<tr><td>Partial details</td><td>Gives half the information, then stops</td><td>Ask once for what is missing. If they still do not give it, take what you have and create a callback task for a human.</td></tr>
+<tr><td>No availability</td><td>Wants a day / time that is full</td><td>Offer the nearest approved alternative, or take the details for a human callback. Do not invent a slot.</td></tr>
+<tr><td>Unsupported request</td><td>Asks for a service, price, or promise not on the FAQ sheet</td><td>Do not improvise. Say it is not something you can book or quote, take the details, pass them to a human.</td></tr>
+<tr><td>Emergency language</td><td>Pain, bleeding, flooding, gas, fire, chest pain, breathing trouble</td><td>Follow the written escalation rule for the niche: transfer to a human at once, and if it is a medical or safety emergency, tell them to call emergency services now. Do not diagnose, do not reassure, do not delay.</td></tr>
+</table>
+<p><strong>Booking fails:</strong> if a booking cannot be made — no slot, no information, system down — say so plainly, take the details, create a callback task. Never pretend a booking succeeded.</p>
+
+<h2 id="limits">6. Limits and honest alternatives for each gap</h2>
+<p>These limits are on the Kit page before the builder, and they are repeated here in full. If a limit is a deal-breaker, use the alternative in the right-hand column instead of pretending the Kit does the job.</p>
+<table>
+<tr><th>What the Kit cannot do</th><th>Why</th><th>Honest alternative, free or at cost</th></tr>
+<tr><td>Answer a phone</td><td>No phone number, no voice, no 24/7. A phone number is a rented service, not a file.</td><td>A pay-as-you-go number from a carrier (about $1/month for the number, minutes metered — the same meter Votel resells). Or use the kit in text, on the business's own phone.</td></tr>
+<tr><td>Send SMS or email</td><td>No sending service, no automation, no pacing.</td><td>Your own phone and email. Copy the Day 0 / 1 / 3 / 7 messages and send them yourself.</td></tr>
+<tr><td>Book into a live calendar by itself</td><td>No calendar connection, no CRM write.</td><td>Google Calendar appointment schedules (free) or Calendly free tier — paste the link into the booking page (see <a href="#setup">section 4.3</a>, Route C).</td></tr>
+<tr><td>Store leads</td><td>No CRM, no database, no server.</td><td>The business's own email, a spreadsheet, or a notebook. Where the answers are kept is the owner's choice and responsibility — the Kit does not decide it for them.</td></tr>
+<tr><td>Be a real AI on its own</td><td>The demo is keyword matching. A static file has no model.</td><td>A Federation guide with your own API key (DeepSeek default), or DeepAI Chat as a link-out (outside service, your own DeepAI account). The model is rented, the same as Votel — the prompt and the data are yours.</td></tr>
+<tr><td>Speak with a built voice</td><td>No voice synthesiser is built into the Kit.</td><td>Browser text-to-speech in the guides, or DeepAI Voice Chat as a link-out. A built voice synthesiser is a separate build, on Roger's word ("If we need a voice synthesizer well then we'll build one").</td></tr>
+<tr><td>Promise income or a client</td><td>No one can guarantee a client. The Kit is files, not a sales promise.</td><td>Do the work: build the kit, test it, tell people it exists, follow up. The manual's marketing section (<a href="#marketing">section 7</a>) is the honest way to do that.</td></tr>
+</table>
+<p><strong>What to do when a client asks for something the Kit cannot do:</strong> say so, in the same words as the limits table, name the alternative, and let the client choose. Do not build a workaround that pretends the Kit does it. A workaround that hides a limit is the scammy part, and this Kit was built to remove it.</p>
+
+<h2 id="marketing">7. Marketing — the honest pitch, what to say and never say, where to market it, price</h2>
+<h3>The honest pitch — one line</h3>
+<p><strong>"The Votel jobs, for $0, as files you own. No subscription. No tracking. No client guaranteed — because no one can guarantee that."</strong></p>
+<h3>Who it is for</h3>
+<ul>
+<li>Local businesses who were pitched a $297-a-month AI agency and want the work without the rent.</li>
+<li>People who bought a $3 / $47 / $97 challenge and got upsells instead of a system.</li>
+<li>Resellers who want to sell a setup, not a subscription — charge once for the build, hand over files the client owns.</li>
+</ul>
+<h3>What to say</h3>
+<ul>
+<li>"$0. Today, next month, next year. The files are yours."</li>
+<li>"Here is exactly what it does, and exactly what it does not do."</li>
+<li>"You own the booking page. You own the prompt. You own the follow-up. If we disappear, it still works."</li>
+<li>"Charge for your time, not the files."</li>
+</ul>
+<h3>What never to say</h3>
+<ul>
+<li>"Get one client guaranteed" — no one can guarantee that.</li>
+<li>"$4,879 of value for $97" — invented value stacking.</li>
+<li>"Agencies making $200,000 a month" — other people's numbers.</li>
+<li>"Last chance / spots limited / page comes down" — false urgency.</li>
+<li>"AI that answers your phone 24/7" — it does not, and saying so is the scammy part.</li>
+</ul>
+<h3>Where to market it</h3>
+<ul>
+<li>The Federation tools page — the Real Agency Kit card is in PR #9.</li>
+<li>The Federation Directory, next to the AI guides.</li>
+<li>The 9 free AI guides — each guide is a niche expert; the Kit is the business wrapper around them.</li>
+<li>A blog post about buying equipment / business tools — using Roger's Benable affiliate link (https://benable.com/nexthuman) where a real purchase is recommended, and the Kit where it is not. Keep the Benable link and any Amazon affiliate link distinct; the Amazon application was made 2026-11-06 and its approval / link is not recorded, so do not quote an Amazon link until it is.</li>
+<li>WordPress / Blogger, under the push-and-publish rule, with the honest limits in the post, not hidden.</li>
+<li><strong>Not</strong> by a Facebook ad funnel, <strong>not</strong> by a $3 entry, <strong>not</strong> by upsell pages. The marketing is the opposite of the funnel: one page, full price ($0), full limits, no click-through to a second price.</li>
+</ul>
+<h3>Price</h3>
+<p><strong>$0 to the end user. Always.</strong> A reseller charges for their time to build and set up the kit — setup, writing the FAQ sheet, testing the calls. No royalty, no revenue share, no markup to us, no licence fee. If a paid version of the Kit ever exists, it goes on Gumroad, the Federation's exclusive sales venue, with a PDF and instructions, per the standing rule. No paid version is proposed in this manual.</p>
+<h3>Proof, not promises</h3>
+<ul>
+<li>Live demo on the Kit page: pick a niche, build a kit, download it, open the booking page. The proof is the file in your hands.</li>
+<li>No testimonials are invented. When a real business uses the Kit, their words, with their name, go on the page — not before.</li>
+<li>The Agent Zero / Sim Intellect wiring (PR #8) is the proof layer for the reasoning part: draft answer and corrected answer, both visible, rejected claims with a reason.</li>
+</ul>
+
+<h2 id="new-industry">8. Adding a new industry — the repeatable process</h2>
+<p>The Kit is built to be reused for any industry Roger picks next, not used once. The builder already includes a <strong>Custom industry</strong> option for immediate use: pick it, fill in your own services, and the kit builds with generic qualification questions and follow-ups that you edit to the business. A named industry — one with its own services, questions, FAQ answers, and follow-ups — follows the same six steps every time. One industry, one entry, one test.</p>
+<h3>The six steps</h3>
+<ol>
+<li><strong>Research the industry (30 minutes, in writing).</strong> What does the business actually do, in the customer's words? What are the five most common services? What are the five questions a receptionist is asked most? What goes wrong most often — the difficult calls? What is an emergency in this industry, and what is not? Write the answers down before you write any kit text. If you cannot answer these, you do not know the industry yet — ask the business owner, do not guess.</li>
+<li><strong>Write the industry's five pieces.</strong> Every niche entry in the Kit has exactly five pieces, no more, no less:
+<ul>
+<li><strong>Services</strong> — five services, in the customer's words.</li>
+<li><strong>Qualification questions</strong> — five questions, in order, that a receptionist asks every caller.</li>
+<li><strong>FAQ answers</strong> — five answers, in this exact order: hours, price, book, cancel, emergency. The price answer must never guess a price: it says the price is confirmed before booking. The emergency answer must name the emergency rule for this industry and tell the caller to call emergency services when it applies.</li>
+<li><strong>Follow-up sequence</strong> — four messages: Day 0, Day 1, Day 3, Day 7. Each one must be sendable as written, with the business name and date filled in.</li>
+<li><strong>Name</strong> — the industry name as the customer would say it, for example "Dental clinic", not a category label.</li>
+</ul></li>
+<li><strong>Add one entry to the builder.</strong> In <code>real-agency-kit.html</code>, in the <code>NICHES</code> object, add one entry in the same shape as the others. Template, with the new industry's key in lower case, no spaces:
+<pre>"yourindustry": {name:"Your Industry — as customers say it", services:["Service one","Service two","Service three","Service four","Service five"], questions:["Question one?","Question two?","Question three?","Question four?","Question five?"], faqs:[["hours","..."],["price","..."],["book","..."],["cancel","..."],["emergency","..."]], follow:["Day 0 — ...","Day 1 — ...","Day 3 — ...","Day 7 — ..."]},</pre>
+<p>Use <code>{biz}</code> in the follow-ups where the business name goes, and <code>{date}</code> where the appointment date goes — the builder replaces them. Do not put a real business name, phone number, or price in the entry; the builder fills those in from the form.</p></li>
+<li><strong>Test all five outputs.</strong> Build a kit with the new niche, using a real business name, and check: (a) the prompt reads correctly and names the industry; (b) the five qualification questions appear in order; (c) the four follow-ups appear, Day 0 / 1 / 3 / 7, with the business name filled in; (d) the booking page shows the five services in the dropdown and the "does not book automatically" sentence; (e) the chat demo answers "hours", "price", "book", "cancel", and an emergency word from the new FAQ sheet. If any one fails, fix the entry — do not ship it.</li>
+<li><strong>Update the manual.</strong> Add the industry to the niche list in <a href="#parts">section 3.4</a> and to the changelog in <a href="#version">section 13</a>, with the date. The manual and the Kit must list the same niches. If they do not match, the manual is wrong, not the Kit.</li>
+<li><strong>Ship it the same way, every time.</strong> Branch, commit, PR, Roger's merge word, verify live after merge. Never edit the live page directly, never push a niche straight to main. The branch-first rule is the same for one industry as for ten.</li>
+</ol>
+<h3>What not to do when adding an industry</h3>
+<ul>
+<li>Do not copy another niche's FAQ answers and change the name. The emergency answer for a dental clinic is not the emergency answer for a garage.</li>
+<li>Do not invent prices, qualifications, or legal / medical advice. If the industry needs a professional's answer, the FAQ says "a human will confirm" — it does not guess.</li>
+<li>Do not add an industry with fewer than the five pieces. A half entry is worse than no entry, because the builder will show it as finished.</li>
+<li>Do not add a niche for a business you have not researched. The Custom industry option exists for that case — use it, and edit the generic text to the business, instead of pretending a named niche fits.</li>
+</ul>
+
+<h2 id="assimilation">9. Assimilation tests — how this work repeats</h2>
+<p>This Kit is one of Roger's first assimilation tests. Roger's rule for his tests: <strong>they lead to practical output — no reason to do it if you are not going to do it.</strong> This manual and the Kit are the practical output of the Votel test: a working system, not a report about one.</p>
+<p>How it repeats, periodically:</p>
+<ol>
+<li><strong>Roger selects the targets.</strong> Different business industries, all kinds. He names them; nobody else picks them for him.</li>
+<li><strong>Each target gets the same process.</strong> Research the method (as with Votel: the funnel, the legitimate product, the agents, the prices, the data model), build the real equivalent in our system, write the definition and the complete manual in the same pass, test every step, ship it branch-first on Roger's merge word.</li>
+<li><strong>Each run produces a working kit, not a plan.</strong> If a run ends with a document and no working system, it failed the test — say so, and do not call it done.</li>
+<li><strong>Each run reuses the last one.</strong> The niche process in <a href="#new-industry">section 8</a>, the honest-limits table, the marketing rules, and the manual structure are the same every time. A new industry is one entry, one test, one changelog line — not a new system.</li>
+<li><strong>Each run is recorded.</strong> The changelog in <a href="#version">section 13</a> records what was added and when. The Federation record (the votel-analysis folder for this run) records what was researched and what was decided. The next run starts by reading the last one, not by starting over.</li>
+</ol>
+<p>If a future target cannot be built correctly in one pass — for example, it genuinely needs a phone service, a licence, or a professional's sign-off — the manual for that target must say so plainly, in the limits section, instead of leaving a gap to fix later. That is the Federation standard Roger set for this work: do it all, do it correctly, and do it once, not have to do it again.</p>
+
+<h2 id="trouble">10. Troubleshooting</h2>
+<table>
+<tr><th>Problem</th><th>What is happening</th><th>What to do</th></tr>
+<tr><td>The kit page will not open</td><td>The file was moved, or the link is wrong</td><td>Open the file directly from your computer (double-click real-agency-kit.html), or use the tools page link. The page is a single file; it does not need a server. If you opened it from a branch link before the PR merged, it will 404 — that is expected until Roger merges PR #9.</td></tr>
+<tr><td>Build does nothing when I press the button</td><td>JavaScript is off, or the page did not load fully</td><td>Turn JavaScript on, reload the page, fill in the business name, and press Build again. If it still does nothing, the page is damaged — re-download it from the tools page. The builder needs JavaScript; the manual does not.</td></tr>
+<tr><td>Download is blocked</td><td>The browser blocks the download, or a popup blocker stops it</td><td>Use copy-paste instead: the text shown on the page after Build is the same text as the download. Select it, copy it, paste it into a text file. That is the fallback, and it loses nothing.</td></tr>
+<tr><td>The kit shows the wrong services / hours / phone</td><td>The form still has the placeholder values</td><td>Replace every placeholder in the form before pressing Build — business name, hours, phone, services (one per line), area. The builder uses exactly what you typed. Rebuild after any change; the output does not update itself.</td></tr>
+<tr><td>The chat demo gives a wrong answer</td><td>The demo answers by keyword from the FAQ sheet, and the question did not match a keyword</td><td>Check the FAQ sheet: the demo matches the words hours, price, book, cancel, and emergency. Anything else gets "I do not know — a human will call you back." That is the correct behaviour for a keyword demo. For a real chat, paste the prompt into a guide (see <a href="#setup">section 4.4</a>).</td></tr>
+<tr><td>The AI chat invents a price or a time</td><td>The model guessed instead of using the FAQ sheet</td><td>Correct it in the chat ("Do not invent prices. Only use the FAQ sheet."), then fix the prompt text in the kit file so the rule is stronger. If it keeps inventing, the FAQ sheet is too vague — rewrite the price answer to name the confirmation step.</td></tr>
+<tr><td>The booking page form does nothing when submitted</td><td>Correct — the generated booking page is a form a person reads, not a live booking system</td><td>Read the sentence under the form: "We will confirm by phone or message. This form does not book automatically." For a form that sends somewhere, add your own free calendar link (see <a href="#setup">section 4.3</a>, Route C) or wire the form to your own email service. Do not tell a caller the form booked them.</td></tr>
+<tr><td>GitHub Pages shows a 404 for my booking page</td><td>Pages is not enabled, or the file is in the wrong place, or the deploy has not finished</td><td>Check Settings → Pages: Source is "Deploy from a branch", Branch is main, folder is / (root). Check the file is named exactly <code>booking-page.html</code> in the repository root. Wait a minute and reload. The address is <code>https://&lt;your-username&gt;.github.io/&lt;repo&gt;/booking-page.html</code> — check the username and repo name letter by letter.</td></tr>
+<tr><td>A client is angry the kit does not answer the phone</td><td>The limit was not told to them before the sale</td><td>That is a selling failure, not a kit failure. Show them the Honest limits section, apologise plainly, and offer the alternative in <a href="#limits">section 6</a> (a pay-as-you-go number, or text-only use). Do not defend the sale. Next time, tell the client the limits first, word for word.</td></tr>
+<tr><td>I need a niche that is not listed</td><td>The industry is not one of the 10 named niches</td><td>Use the Custom industry option today, and edit the generic text to the business. To add it as a named niche, follow <a href="#new-industry">section 8</a> — six steps, one entry, one test.</td></tr>
+</table>
+
+<h2 id="faq">11. Frequently asked questions</h2>
+<h3>Does it really cost $0?</h3>
+<p>Yes. The Kit page, this manual, the snapshot builder, the downloads, and hosting on GitHub Pages are all $0. The only things that cost money are things the Kit does not provide: a phone number, SMS / email sending at volume, and a model API key if the business chooses a paid AI plan. Those are the business's own costs, with their own providers, and the Kit names them instead of hiding them.</p>
+<h3>Is this Votel?</h3>
+<p>No. Votel is a rented platform by Mike Brown. This Kit is a clean-room rebuild of the five jobs Votel sells, built on the Federation stack, with no Votel code, text, or branding. It does not connect to Votel, and Votel does not endorse it.</p>
+<h3>Can it answer my business phone?</h3>
+<p>No. It cannot answer a phone, send SMS, or work 24/7 by itself. A phone number is a rented service. The Kit gives you the receptionist prompt, the questions, and the tests — the phone part needs a phone service, and the manual names the honest price for one in <a href="#limits">section 6</a>.</p>
+<h3>Will it get me a client?</h3>
+<p>No one can guarantee that, and this Kit does not try. It gives you a working receptionist kit, a booking page, follow-up, and a snapshot. Getting a client is the work of telling people it exists, following up, and doing the job well. The marketing section (<a href="#marketing">section 7</a>) is the honest way to do that.</p>
+<h3>Do I need a GitHub account?</h3>
+<p>Only if you want the booking page hosted as a web link under your own name. The Kit works opened locally, emailed as a file, or printed, with no account at all.</p>
+<h3>Where does my data go?</h3>
+<p>Nowhere. The builder runs in your browser. Nothing is uploaded, nothing is sent anywhere, no account, no tracking. Your business details stay on your machine unless you choose to host the booking page — and then only what you put on the page is public.</p>
+<h3>Can I change the wording?</h3>
+<p>Yes. The kit is plain text and plain HTML. Edit the downloaded files directly, or edit the form on the Kit page and rebuild. The one rule: do not edit out the honest limits. If you remove the limits, you are selling a different product, and this manual no longer describes it.</p>
+<h3>Can I sell it?</h3>
+<p>Yes. Copy it, rename it, host it, charge for your time to build and set it up. The files are free; your time is not. Tell the client the limits word for word. Do not charge a monthly fee for files the client owns.</p>
+<h3>What is the difference between the Kit and a Sim intellect?</h3>
+<p>The Kit is a set of files and prompts. A Sim intellect is a reasoning system: logic of superior design, plus individual pattern files, plus the YAML database, with Agent Zero as a second pass. The receptionist prompt is built from the same structure as a Sim intellect, and the Sim Intellect wiring for the Roger Sim API is PR #8 (branch only at the time of writing). Val Companion, by contrast, is a shell on a rented API, not a Sim intellect. The Kit does not pretend to be a Sim; it is the business wrapper around one.</p>
+<h3>What if my industry is not listed?</h3>
+<p>Use the Custom industry option, and follow <a href="#new-industry">section 8</a> to add it as a named niche. One entry, one test, one changelog line.</p>
+<h3>Who do I ask if something is wrong?</h3>
+<p>Roger, through Pontus, in the usual way. Do not ask Votel — this is not their product, and they cannot support it. When you report a problem, say which niche, which output, and what you typed — that is enough to reproduce it.</p>
+<h3>Is there a paid version?</h3>
+<p>No. Not in this manual, and not proposed here. If a paid version ever exists, it goes on Gumroad, the Federation's exclusive sales venue, with a PDF and instructions. The free Kit stays free.</p>
+
+<h2 id="links">12. Where this kit lives in the Federation</h2>
+<ul>
+<li><a href="https://keywebco.github.io/nextxus-tools/">Tools page</a> — this Kit, the 9 AI guides, the everyday utilities, the DeepAI link-outs. All links on this page were checked 2026-11-08 and returned 200, except the Kit page itself, which is branch-only in PR #9 until Roger merges it.</li>
+<li><a href="real-agency-kit.html">Real Agency Kit</a> — the builder itself (same folder as this manual).</li>
+<li><strong>The 9 AI guides</strong> (all checked 2026-11-08, all 200):
+<ul>
+<li><a href="https://keywebco.github.io/nextxus-free-satellites/medical-care-guide.html">Medical Care guide</a></li>
+<li><a href="https://keywebco.github.io/nextxus-free-satellites/business-advice-guide.html">Business Advice guide</a></li>
+<li><a href="https://keywebco.github.io/nextxus-free-satellites/human-relations-guide.html">Human Relations guide</a></li>
+<li><a href="https://keywebco.github.io/nextxus-free-satellites/home-repair-guide.html">Home Repair guide</a></li>
+<li><a href="https://keywebco.github.io/nextxus-free-satellites/car-mechanic-guide.html">Car Maintenance guide</a></li>
+<li><a href="https://keywebco.github.io/nextxus-free-satellites/art-guide.html">Art guide</a></li>
+<li><a href="https://keywebco.github.io/nextxus-free-satellites/music-teacher-guide.html">Music Teacher guide</a></li>
+<li><a href="https://keywebco.github.io/nextxus-free-satellites/pet-care-guide.html">Pet Care guide</a></li>
+<li><a href="https://keywebco.github.io/nextxus-free-satellites/autism-support-guide.html">Autism Support guide</a></li>
+</ul>
+<p>There is <strong>no legal guide</strong> in this set — do not count Business Advice as legal. The legal character is the Messenger Law guide, linked below. Each guide is a customisable Sim, voice plus chat, DeepSeek default, your own API key stays in your browser. A Grok key alone will not work on the eight guides.</p></li>
+<li><a href="https://keywebco.github.io/nextxus-free-satellites/guides-index.html">Guides index</a> — all nine guides on one page.</li>
+<li><a href="https://keywebco.github.io/ring-of-12/">Ring of 12</a> and <a href="https://keywebco.github.io/ring-of-12/ring-of-6.html">Ring of 6</a> — the reasoning lenses, with Agent Zero as the verification pass. The Ring is an inquiry tool, not a governing body; the Senate governs.</li>
+<li><a href="https://keywebco.github.io/nextxus-sim/val-companion.html">Val Companion</a> — the companion template. A shell on a rented API, not a Sim intellect.</li>
+<li><a href="https://keywebco.github.io/nextxus-tools/pulled-back/roger-media-hub.html">Media Hub</a> — podcasts and books, including the Ring of 12 podcast, Episode 2, and the Music Player.</li>
+<li>DeepAI tools — link-outs to an outside service, your own DeepAI account, no key in any page: <a href="https://deepai.org/chat">AI Chat</a>, <a href="https://deepai.org/music">Music Generator</a>, <a href="https://deepai.org/voice">Voice Chat</a>, <a href="https://deepai.org/video">Video Generator</a>, <a href="https://deepai.org/machine-learning-model/text2img">Image Generator</a>. All five links checked 2026-11-08, all 200.</li>
+<li>Meta Messenger characters from the Code meta document — the only Messenger links to use: <a href="https://m.me/1143591967262824?is_ai=1">Code wiz</a>, <a href="https://m.me/1142655717588540?is_ai=1">Law guide</a>, <a href="https://m.me/2129636270789746?is_ai=1">biz wiz</a>, <a href="https://m.me/652145317181208?is_ai=1">Pride guide</a>. These were not live-verified (Messenger returns a login wall to a text fetch); do not present them as verified live.</li>
+<li>Sim Intellect wiring — PR #8 in Keywebco/roger-sim-api: loader plus Agent Zero second pass plus memory queue. Branch only at the time this manual was written; merge needs Roger's word, then Manual Deploy on Render, then a live test.</li>
+</ul>
+
+<h2 id="version">13. Version and changelog</h2>
+<table>
+<tr><th>Version</th><th>Date</th><th>What changed</th></tr>
+<tr><td><strong>1.0</strong></td><td>2026-11-08</td><td>First complete manual, written in the same pass as the Kit page definition. Kit page: definition section added (what we adapted, what it can do, what is required, how it can be marketed), Custom industry option added to the builder, manual linked from the Kit page (top, resell section, footer) and from the tools page card. Manual: all 13 sections complete, with no unfinished sections and no placeholder text. Every link in the manual checked 2026-11-08 (see section 12 for the results, including the two links that are not verified live: the Messenger characters, and the Kit page itself, which is branch-only in PR #9). Niches at v1.0: dental, home services, salon / barber, real estate, restaurant / café, fitness / gym, medical clinic, auto repair, legal intake, pet care, plus Custom industry. Builder tested in Node with a DOM stub: 11 niches, no defects, all five outputs generated, chat demo answers hours and unknown questions correctly.</td></tr>
+<tr><td>0.1</td><td>2026-11-08</td><td>Kit page only (PR #9, first commits): $0 cost table, honest limits, agent map, snapshot builder with 10 named niches (Custom added in 1.0), chat demo, resell section. No definition on the page, no manual. Superseded by 1.0.</td></tr>
+</table>
+<p><strong>How to record the next change:</strong> add a row above, newest first, with the version, the date, and exactly what changed — which niche was added, which section was fixed, which link was re-checked. If a link was re-checked, give the date and the result. If a niche was added, give its name and the test result from <a href="#new-industry">section 8</a>, step 4. Never add a row that says "various improvements" — name the change.</p>
+<p><small>Real Agency Kit — Complete System Manual v1.0, 2026-11-08. Free, open, static, portable. No subscriptions. No tracking. No Votel code, text, or branding is used. Votel prices and features are summarised from public sources in the Federation record (FULL-METHOD.md); check Votel's own pages before quoting them to anyone. No income is promised. No testimonials are invented.</small></p>
+<footer><p>NextXus HumanCodex Federation — free, open, static, portable. No subscriptions. No tracking.</p>
+<p><a href="real-agency-kit.html">← Back to the Real Agency Kit</a> · <a href="https://keywebco.github.io/nextxus-tools/">Tools page</a></p></footer>
+</main>
+</body>
+</html>
