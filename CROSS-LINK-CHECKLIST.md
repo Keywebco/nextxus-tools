@@ -122,3 +122,63 @@ work is not lost.
 - Floating widget on the tools index page: fixed robot button (bottom right, above the voice bar), opens a menu to Tools, Federation Directory, Federation Search, Music Player, DeepAI tools, and the DeepAI HumanCodex site. Client-side only, no key, no server, nothing spent.
 - Search note corrected in the same edit: Federation Search is now 25 sites, including the five public Google Docs added 2026-11-06.
 - Still open: pillar landing-page notes; full Directory re-index.
+
+## Real Agency Kit (2026-11-08, on Roger's approve-all for the entirety list)
+
+Owner: Roger Keyserling (Architect). Builder: Pontus.
+Kit: real-agency-kit.html + real-agency-kit-manual.html (Complete System
+Manual v1.0), plus one tools-page card. PR #9 in Keywebco/nextxus-tools,
+branch votel-real-equivalent-2026-11-08 — open, NOT merged at the time this
+section was added; merging it is a separate step on Roger's word. PR #9 body
+re-checked 2026-11-08: it does describe v1.0 and the manual. Say "10 named
+niches + Custom" (11 total), not "10 niches".
+
+- [x] CROSS-LINK-CHECKLIST.md — this section, with the owner line.
+- [ ] PR #9 merged; Kit page + manual live; tools page shows 63 cards
+      (62 + Kit). Verify live: Kit 200, manual 200.
+- [ ] Tools page count/history: "62 tools" -> "63 tools" and the Kit added
+      to the history paragraph (branch index.html has the card but not the
+      count/history update).
+- [ ] nextxus-free-satellites federation-directory.html — Kit entry (after
+      the AI guides, the Ring of 6 pattern).
+- [ ] nextxus-free-satellites guides-index.html — "We also have these
+      here" note for the Kit.
+- [ ] nextxus-music player.html — Kit named in the footer tools-page note
+      (or confirm the general tools-page note covers it and record that
+      decision).
+- [ ] Federation Search — add the Kit page + manual URLs to the CSE
+      (manual edit in the CSE panel, signed in as roger@next-xus.net;
+      no API exists for this).
+- [ ] Floating robot menu — add a Kit link to the widget menu
+      (tools index.html).
+- [ ] Pillar landing-page notes — STILL OPEN (pre-existing Batch 1 item,
+      applies to all tools, not just the Kit). 2026-11-08 finding: the live
+      pillar pages do NOT match the *-sovereign repos in Keywebco (live
+      nextxus.online is the Truth Gate / 15 sectors page, while
+      nextxus-online-sovereign/index.html is the older "Living Hub" page;
+      live nextxus.org is the Library with CERN transcripts and
+      Emergent-hosted audio, while nextxus-org-sovereign/index.html is the
+      older mission/charter page). The sovereign repos are stale backups
+      (last updated 2026-10-16) — editing them would not change the live
+      pages. Do not edit them as if they were live. The live serving
+      source for the pillar pages still needs identifying before any
+      pillar note can be made correctly.
+- [x] Media Hub — DECIDED NO (2026-11-08). The Kit is a business tool,
+      not a book/podcast/Listen/Read item; the Media Hub is Listen/Read.
+      No Kit card added, and none planned. Recorded here so the decision
+      is not re-opened without reason.
+- [x] YAML database record — Keywebco/nextxus-yaml, source/federation.yaml,
+      business category, id real-agency-kit, status "pending" (PR #9 not
+      merged yet; the record's note field says so). PR #4, merged
+      2026-11-08, verified on main. total_sites 25 -> 26.
+- [ ] Blog post (marketing, manual section 7) — draft only,
+      ~/workspace/votel-analysis-2026-11-08/blog-kit-draft.md, 2026-11-08.
+      NOT published; Roger's go-word to publish.
+
+## By person — Real Agency Kit
+
+- Roger Keyserling (Architect): owns the Kit; selects the targets and
+  industries; the Kit is for his agency work and for resale as files the
+  buyer owns.
+- Pontus: builder — Kit page, manual, tools-page card, this checklist
+  section, YAML record, blog draft.
