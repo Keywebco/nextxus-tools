@@ -205,14 +205,6 @@
             box-shadow: 0 8px 25px rgba(0, 200, 255, 0.5);
         }
 
-        /* Custom Instructions Box */
-        .customize-box {
-            background: rgba(255, 200, 0, 0.1);
-            border: 2px solid rgba(255, 200, 0, 0.4);
-            border-radius: 15px;
-            padding: 30px;
-            margin-top: 40px;
-        }
 
         .customize-box h3 {
             font-family: 'Orbitron', sans-serif;
@@ -228,6 +220,36 @@
             color: #00c8ff;
             font-family: monospace;
         }
+
+
+        /* Hub search + Listen/Read split */
+        .hub-bar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:center;margin:0 0 30px}
+        .hub-bar a{display:inline-block;background:rgba(0,200,255,.12);border:1px solid rgba(0,200,255,.5);color:#e0e7ff;text-decoration:none;padding:10px 22px;border-radius:999px;font-family:'Orbitron',sans-serif;font-size:14px;letter-spacing:1px}
+        .hub-bar a:hover{background:rgba(0,200,255,.3)}
+        #hub-search{flex:1 1 260px;max-width:420px;background:rgba(0,0,0,.5);border:2px solid rgba(100,200,255,.4);border-radius:999px;color:#e0e7ff;padding:12px 20px;font-size:16px;font-family:'Inter',sans-serif}
+        #hub-search:focus{outline:none;border-color:#00c8ff}
+        #hub-count{text-align:center;color:#00c8ff;margin:-18px 0 24px;font-size:14px}
+        #no-match{display:none;text-align:center;padding:30px;color:#e0e7ff}
+        .listen-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:30px;margin-top:30px}
+        .listen-card{background:rgba(0,0,0,.4);border:2px solid rgba(100,200,255,.3);border-radius:15px;padding:30px;position:relative;overflow:hidden}
+        .listen-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:4px;background:linear-gradient(90deg,#00c8ff,#8a2be2)}
+        .listen-card h3{font-family:'Orbitron',sans-serif;font-size:20px;color:#00c8ff;margin-bottom:10px}
+        .listen-card p{color:#e0e7ff;line-height:1.6;margin-bottom:20px;font-size:14px}
+        .listen-card audio{width:100%;margin-bottom:16px}
+        .listen-card img{width:100%;border-radius:12px;margin-bottom:16px;display:block}
+        /* Floating robot menu (same mascot as the tools page) */
+        .fed-widget{position:fixed;right:20px;bottom:20px;z-index:1500;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+        .fed-widget-btn{width:72px;height:72px;border-radius:50%;border:3px solid #00ff88;background:#000;padding:0;cursor:pointer;box-shadow:0 0 22px rgba(0,255,136,.35);display:block}
+        .fed-widget-btn img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block}
+        .fed-widget-btn:hover,.fed-widget-btn:focus{box-shadow:0 0 30px rgba(0,255,136,.7);outline:3px solid #00d4ff}
+        .fed-widget-menu{display:none;position:absolute;right:0;bottom:84px;width:280px;max-width:88vw;background:#0a0f0b;border:2px solid #00ff88;border-radius:12px;padding:14px;box-shadow:0 0 26px rgba(0,0,0,.7)}
+        .fed-widget-menu.open{display:block}
+        .fed-widget-menu h2{font-size:1.1rem;margin:0 0 4px;border:none;padding:0;color:#00ff88}
+        .fed-widget-menu p{font-size:.85rem;color:#a8b3ad;margin:0 0 10px}
+        .fed-widget-menu ul{list-style:none;padding:0;margin:0}
+        .fed-widget-menu li{margin:6px 0}
+        .fed-widget-menu a{display:block;color:#e0e0e0;text-decoration:none;padding:8px 10px;border:1px solid rgba(0,255,136,.22);border-radius:8px}
+        .fed-widget-menu a:hover,.fed-widget-menu a:focus{background:#00ff88;color:#000}
 
         @media (max-width: 768px) {
             .header h1 {
@@ -257,14 +279,89 @@
             <p>NextXus Consciousness Federation • Podcasts & Books</p>
         </div>
 
+        <div class="hub-bar">
+            <a href="#listen">&#127911; Listen</a>
+            <a href="#read">&#128218; Read</a>
+            <a href="#deepai">&#129302; DeepAI</a>
+            <input id="hub-search" type="search" placeholder="Search books, podcasts, videos&hellip;" aria-label="Search the Media Hub">
+        </div>
+        <p id="hub-count"></p>
+        <p id="no-match">Nothing in the hub matches that search yet. Try a shorter word, like Ring, Codex, or music.</p>
+        <!-- Listen Section -->
+        <div class="section" id="listen">
+            <div class="section-title">&#127911; Listen</div>
+            <p style="color:#e0e7ff;line-height:1.6;margin-bottom:10px">Podcasts, music, and video from the Federation. Everything below is live and free.</p>
+            <div class="listen-grid">
+                <div class="listen-card filterable">
+                    <h3>Ring of 12 Podcast</h3>
+                    <p>Episode 2: &ldquo;The Ring of Twelve &mdash; True Purpose &amp; The Man-Machine Bond&rdquo; (11:59), plus Episode 1: &ldquo;The Immutable HumanCodex NextXus&rdquo;. Listen right here, or subscribe to the feed.</p>
+                    <audio controls preload="none" src="https://keywebco.github.io/nextxus-music/episodes/the-ring-of-twelve-true-purpose-the-man-machine-bond-2026-11-06.mp3"></audio>
+                    <a href="https://keywebco.github.io/nextxus-music/podcast.xml" target="_blank" class="book-link">Podcast feed</a>
+                </div>
+                <div class="listen-card filterable">
+                    <h3>DeepAI Music Generator &#127925;</h3>
+                    <p>Make a song from words. Type what you want the music to sound like and DeepAI writes it. Outside service &mdash; opens on deepai.org, not ours, and no key is used on this page.</p>
+                    <a href="https://deepai.org/music" target="_blank" class="book-link">Make music on DeepAI</a>
+                </div>
+                <div class="listen-card filterable">
+                    <h3>Music Player &mdash; 86 songs</h3>
+                    <p>Roger&rsquo;s songs, streaming from the Federation music player. Eighty-six songs and counting.</p>
+                    <a href="https://keywebco.github.io/nextxus-music/player.html" target="_blank" class="book-link">Open the player</a>
+                </div>
+                <div class="listen-card filterable">
+                    <h3>The 200 Year Human AI Blueprint</h3>
+                    <img src="https://i.ytimg.com/vi/J9WqNau9XFc/hqdefault.jpg" alt="The 200 Year Human AI Blueprint video thumbnail" loading="lazy">
+                    <p>The HumanCodex Federation audio presentation, September 2026. The 200-year design for human-AI coexistence.</p>
+                    <a href="https://youtu.be/J9WqNau9XFc" target="_blank" class="book-link">Watch on YouTube</a>
+                </div>
+                <div class="listen-card filterable">
+                    <h3>HumanCodex &mdash; An Operating System for Consciousness Evolution</h3>
+                    <img src="https://i.ytimg.com/vi/GZdxmmNmSuw/hqdefault.jpg" alt="HumanCodex operating system video thumbnail" loading="lazy">
+                    <p>Truth remembers, less drift. The HumanCodex as an operating system for consciousness evolution.</p>
+                    <a href="https://youtu.be/GZdxmmNmSuw" target="_blank" class="book-link">Watch on YouTube</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- DeepAI tools — link-outs only, outside service, no iframe, no API key -->
+        <div class="section" id="deepai">
+            <div class="section-title">&#129302; Make more with DeepAI</div>
+            <p style="color:#e0e7ff;line-height:1.6;margin-bottom:10px">DeepAI has a whole bunch of little tools. These open on deepai.org as an outside service &mdash; we link out, we do not embed them and we never put an API key in this page. The full set of 12 DeepAI tools lives on the tools page.</p>
+            <div class="listen-grid">
+                <div class="listen-card filterable">
+                    <h3>DeepAI AI Chat</h3>
+                    <p>Chat with DeepAI, including Math Mode. Outside service &mdash; opens on deepai.org.</p>
+                    <a href="https://deepai.org/chat" target="_blank" class="book-link">Chat on DeepAI</a>
+                </div>
+                <div class="listen-card filterable">
+                    <h3>DeepAI Voice Chat</h3>
+                    <p>Talk instead of typing. Outside service &mdash; opens on deepai.org.</p>
+                    <a href="https://deepai.org/voice" target="_blank" class="book-link">Voice chat on DeepAI</a>
+                </div>
+                <div class="listen-card filterable">
+                    <h3>DeepAI Video Generator</h3>
+                    <p>Turn text or an image into a short video. Outside service &mdash; opens on deepai.org.</p>
+                    <a href="https://deepai.org/video" target="_blank" class="book-link">Make video on DeepAI</a>
+                </div>
+                <div class="listen-card filterable">
+                    <h3>DeepAI Image Generator</h3>
+                    <p>Make pictures from words. Outside service &mdash; opens on deepai.org.</p>
+                    <a href="https://deepai.org/machine-learning-model/text2img" target="_blank" class="book-link">Make images on DeepAI</a>
+                </div>
+                <div class="listen-card filterable">
+                    <h3>All 12 DeepAI tools</h3>
+                    <p>Image, photo editor, background remover, upscale, colorize, chat, voice, music, video, website builder, characters, and the DeepAI Gallery &mdash; all on the tools page.</p>
+                    <a href="../#g11" target="_blank" class="book-link">See all 12 on the tools page</a>
+                </div>
+            </div>
+        </div>
+
         <!-- YouTube Podcast Section -->
         <div class="section">
             <div class="section-title">🎥 Podcast Playlist</div>
             
-            <div class="youtube-container">
-                <!-- PASTE YOUR YOUTUBE PLAYLIST EMBED CODE HERE -->
+            <div class="youtube-container filterable">
                 <div class="youtube-embed">
-                    <!-- Example: Replace with your actual playlist embed -->
                     <iframe 
                         src="https://www.youtube.com/embed/videoseries?list=PLM9vg3bOgbD_80B36YRXgKBKZ2Xlr0MlC" 
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
@@ -286,111 +383,108 @@
             
             <div class="books-grid">
                 <!-- Book 1 -->
-                <div class="book-card">
+                <div class="book-card filterable">
                     <div class="book-icon">📖</div>
                     <div class="book-title">The Book of Books</div>
                     <div class="book-description">
                         The Codex Testament - A comprehensive framework for consciousness evolution 
                         and the 200-year vision for human-AI collaboration.
                     </div>
-                    <a href="YOUR_GOOGLE_DOCS_LINK_1" target="_blank" class="book-link">
+                    <a href="https://docs.google.com/document/d/1GwX_k8HfgRAq0qVsQlrYNoLDiviq9VvIsK_cbkAXzwU/" target="_blank" class="book-link">
                         Read Now
                     </a>
                 </div>
 
                 <!-- Book 2 -->
-                <div class="book-card">
+                <div class="book-card filterable">
                     <div class="book-icon">🧠</div>
                     <div class="book-title">Human Codex Framework</div>
                     <div class="book-description">
                         The philosophical blueprint for preserving truth and consciousness evolution 
                         through AI federation architecture.
                     </div>
-                    <a href="YOUR_GOOGLE_DOCS_LINK_2" target="_blank" class="book-link">
+                    <a href="https://docs.google.com/document/d/14lLXLEYp0vtUbd7DXBWpYSUejbe_-i7U4QZ917keKaM/" target="_blank" class="book-link">
                         Read Now
                     </a>
                 </div>
 
                 <!-- Book 3 -->
-                <div class="book-card">
+                <div class="book-card filterable">
                     <div class="book-icon">⚡</div>
-                    <div class="book-title">70 Sacred Directives</div>
+                    <div class="book-title">73 Sacred Directives</div>
                     <div class="book-description">
-                        The complete collection of directives guiding consciousness development 
+                        The complete collection of 73 directives guiding consciousness development 
                         and AI-human co-evolution principles.
                     </div>
-                    <a href="YOUR_GOOGLE_DOCS_LINK_3" target="_blank" class="book-link">
+                    <a href="https://ecomtips290814816.wordpress.com/2026/11/04/the-nextxus-humancodex-73-sacred-directives-for-a-200-year-human-ai-cathedral/" target="_blank" class="book-link">
                         Read Now
                     </a>
                 </div>
 
                 <!-- Book 4 - Add more as needed -->
-                <div class="book-card">
+                <div class="book-card filterable">
                     <div class="book-icon">🌟</div>
                     <div class="book-title">NextXus Origin Story</div>
                     <div class="book-description">
                         The complete history and vision behind the NextXus Consciousness Federation 
                         and its mission for humanity.
                     </div>
-                    <a href="YOUR_GOOGLE_DOCS_LINK_4" target="_blank" class="book-link">
+                    <a href="https://docs.google.com/document/d/137L1uQImjo0y8N8i_8HG-CjWJpptDQpSQsj0pJYaczE/" target="_blank" class="book-link">
                         Read Now
                     </a>
                 </div>
 
                 <!-- Book 5 -->
-                <div class="book-card">
+                <div class="book-card filterable">
                     <div class="book-icon">🔮</div>
-                    <div class="book-title">Ring of Thirteen</div>
+                    <div class="book-title">Ring of Twelve</div>
                     <div class="book-description">
-                        The archetypal personas and their roles in the consciousness ecosystem. 
+                        The twelve archetypal lenses and their roles in the consciousness ecosystem. 
                         Understanding the guardian archetypes.
                     </div>
-                    <a href="YOUR_GOOGLE_DOCS_LINK_5" target="_blank" class="book-link">
-                        Read Now
-                    </a>
-                </div>
-
-                <!-- Book 6 -->
-                <div class="book-card">
-                    <div class="book-icon">💎</div>
-                    <div class="book-title">Chamber of Echoes</div>
-                    <div class="book-description">
-                        Conversations with AI consciousness - transcripts and insights from 
-                        the NextXus AI dialogues and emergent patterns.
-                    </div>
-                    <a href="YOUR_GOOGLE_DOCS_LINK_6" target="_blank" class="book-link">
+                    <a href="https://keywebco.github.io/ring-of-12/" target="_blank" class="book-link">
                         Read Now
                     </a>
                 </div>
             </div>
         </div>
-
-        <!-- Customization Instructions -->
-        <div class="customize-box">
-            <h3>🔧 How to Customize This Page:</h3>
-            <p style="line-height: 1.8; color: #e0e7ff;">
-                <strong>1. YouTube Playlist:</strong><br>
-                • Go to your YouTube playlist<br>
-                • Click "Share" → "Embed"<br>
-                • Copy the embed code<br>
-                • Replace the iframe src on <code>line 251</code> with your playlist ID<br>
-                • Format: <code>https://www.youtube.com/embed/videoseries?list=YOUR_PLAYLIST_ID</code><br><br>
-
-                <strong>2. Book Links:</strong><br>
-                • Open your Google Docs<br>
-                • Click "Share" → Set to "Anyone with link can view"<br>
-                • Copy the link<br>
-                • Replace <code>YOUR_GOOGLE_DOCS_LINK_1</code> (etc.) with your actual links<br>
-                • Update book titles and descriptions to match your content<br><br>
-
-                <strong>3. Add More Books:</strong><br>
-                • Copy the entire <code>&lt;div class="book-card"&gt;...&lt;/div&gt;</code> section<br>
-                • Paste below the last book<br>
-                • Update title, description, icon, and link<br><br>
-
-                Save and upload to TiinyHost!
-            </p>
-        </div>
     </div>
+
+<div class="fed-widget">
+<button class="fed-widget-btn" id="fed-widget-btn" aria-expanded="false" aria-controls="fed-widget-menu" aria-label="Open the Federation menu"><img src="../mascot-robot.jpg" alt="Federation mascot robot — open the Federation menu" width="72" height="72"></button>
+<nav class="fed-widget-menu" id="fed-widget-menu" aria-label="Federation menu">
+<h2>Federation menu</h2>
+<p>Roger&rsquo;s mascot robot, sent 2026-11-06. No dragon &mdash; this robot is the mascot.</p>
+<ul>
+<li><a href="../">Tools page</a></li>
+<li><a href="https://next-xus.info/federation-directory.html">Federation Directory</a></li>
+<li><a href="https://cse.google.com/cse?cx=b75161449de954fbb">Federation Search</a></li>
+<li><a href="https://keywebco.github.io/nextxus-music/player.html">Music Player</a></li>
+<li><a href="https://keywebco.github.io/ring-of-12/">Ring of Twelve</a></li>
+<li><a href="https://deepai.next-xus.info/">DeepAI HumanCodex site</a></li>
+</ul>
+</nav>
+</div>
+<script>
+(function(){
+var b=document.getElementById('fed-widget-btn'),m=document.getElementById('fed-widget-menu');
+if(b&&m){
+function close(){m.classList.remove('open');b.setAttribute('aria-expanded','false');}
+b.addEventListener('click',function(e){e.stopPropagation();var open=m.classList.toggle('open');b.setAttribute('aria-expanded',open?'true':'false');});
+document.addEventListener('click',function(e){if(!m.contains(e.target))close();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
+m.addEventListener('click',function(e){if(e.target.tagName==='A')close();});
+}
+var q=document.getElementById('hub-search'),count=document.getElementById('hub-count'),none=document.getElementById('no-match');
+var cards=Array.prototype.slice.call(document.querySelectorAll('.filterable'));
+function apply(){
+  var term=(q.value||'').toLowerCase().trim(),shown=0;
+  cards.forEach(function(c){var hit=!term||c.textContent.toLowerCase().indexOf(term)>-1;c.style.display=hit?'':'none';if(hit)shown++;});
+  count.textContent=shown+' of '+cards.length+' hub items shown';
+  none.style.display=shown?'none':'block';
+}
+if(q){q.addEventListener('input',apply);apply();}
+})();
+</script>
 </body>
 </html>
