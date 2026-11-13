@@ -139,5 +139,142 @@ footer .inner{max-width:900px;margin:0 auto}
   updateCounts();
 })();
 </script>
+<!-- Guide bot — Federation guide and mini-Federation chat (added 2026-11-13, guide-bot rollout). The same guide bot on every Federation site. -->
+<style>
+.guide-bot-btn{position:fixed;right:1rem;bottom:1rem;z-index:9999;width:64px;height:64px;border-radius:50%;border:2px solid #f5c542;background:#000;padding:0;overflow:hidden;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.5)}
+.guide-bot-btn img{width:100%;height:100%;object-fit:cover;display:block}
+.guide-bot-panel{position:fixed;right:1rem;bottom:5.5rem;z-index:9999;width:min(360px,calc(100vw - 2rem));max-height:70vh;overflow-y:auto;background:rgba(0,0,0,.92);color:#fff;border:2px solid #f5c542;padding:1rem 1.25rem;font-family:system-ui,sans-serif;font-size:1rem;line-height:1.45;display:none;box-shadow:0 8px 32px rgba(0,0,0,.6)}
+.guide-bot-panel.open{display:block}
+.guide-bot-panel h2{margin:.25rem 2rem .5rem 0;font-size:1.25rem;color:#f5c542}
+.guide-bot-panel p{margin:.5rem 0}
+.guide-bot-panel ul{margin:.25rem 0 .75rem;padding-left:1.25rem}
+.guide-bot-panel a{color:#f5c542}
+.guide-bot-close{position:absolute;top:.4rem;right:.6rem;background:none;border:0;color:#fff;font-size:1.5rem;cursor:pointer;line-height:1}
+.guide-bot-note{color:#ccc;font-size:.9rem}
+.guide-bot-chat{max-height:180px;overflow-y:auto;background:rgba(255,255,255,.06);border:1px solid #555;padding:.5rem;margin:.5rem 0;font-size:.95rem}
+.guide-bot-msg{margin:.4rem 0}
+.guide-bot-msg b{color:#f5c542}
+.guide-bot-form{display:flex;gap:.4rem;margin:.5rem 0 0}
+.guide-bot-form input{flex:1;min-width:0;font-size:1rem;padding:.4rem;box-sizing:border-box}
+.guide-bot-form button{background:#f5c542;color:#000;border:0;font-size:1rem;padding:.4rem .8rem;cursor:pointer;font-weight:bold}
+.guide-bot-form button:disabled{opacity:.5;cursor:wait}
+</style>
+<button class="guide-bot-btn" id="guide-bot-btn" type="button" aria-label="Open the Federation guide — the little blue guide bot" aria-expanded="false" aria-controls="guide-bot-panel"><img src="guide-bot.jpg" alt="Guide bot — a little blue and silver robot"></button>
+<div class="guide-bot-panel" id="guide-bot-panel" role="dialog" aria-label="Federation guide and chat">
+  <button class="guide-bot-close" id="guide-bot-close" type="button" aria-label="Close the guide">&#10005;</button>
+  <h2>Federation guide</h2>
+  <p><strong>This is the Federation's guide — a mini Federation. Ask it a question and it answers from the Federation.</strong></p>
+  <p>You are on: Text Tools</p>
+  <p><strong>The four doors</strong></p>
+  <ul>
+    <li><a href="https://next-xus.net/">Tools</a> — live at next-xus.net</li>
+    <li><a href="https://next-xus.info/">Guides</a> — live at next-xus.info</li>
+    <li><a href="https://next-xus.org/">Maps</a> — live at next-xus.org</li>
+    <li><a href="https://next-xus.biz/">Systems</a> — live at next-xus.biz</li>
+  </ul>
+  <p><strong>On this site — NextXus Tools</strong></p>
+  <ul>
+    <li><a href="index.html">Tools directory</a> — all NextXus Tools</li>
+    <li><a href="calculator.html">Calculator</a></li>
+    <li><a href="code-beautifier.html">Code Beautifier</a></li>
+    <li><a href="color-picker.html">Color Picker</a></li>
+    <li><a href="deepai-gallery.html">DeepAI Gallery</a></li>
+    <li><a href="image-resize.html">Image Resize &amp; Crop</a></li>
+    <li><a href="randomizer.html">Randomizer</a></li>
+    <li><a href="text-tools.html">Text Tools</a></li>
+    <li><a href="unit-converter.html">Unit Converter</a></li>
+    <li><a href="real-agency-kit.html">Real Agency Kit</a> — free. No purchase or donation link exists.</li>
+    <li><a href="real-agency-kit-manual.html">Real Agency Kit Manual</a></li>
+  </ul>
+  <p><strong>Messages from Roger</strong></p>
+  <p class="guide-bot-note">Message recording to be supplied by Roger.</p>
+  <p><strong>Ask the guide</strong></p>
+  <p class="guide-bot-note">Answers come from Roger Sim, the Federation's working model, answering from Federation material.</p>
+  <div class="guide-bot-chat" id="guide-bot-chat" aria-live="polite"></div>
+  <form class="guide-bot-form" id="guide-bot-form">
+    <input type="text" id="guide-bot-input" placeholder="Ask about the Federation&hellip;" aria-label="Ask the guide a question" autocomplete="off">
+    <button type="submit">Send</button>
+  </form>
+</div>
+<script>
+(function(){
+var b=document.getElementById('guide-bot-btn'),p=document.getElementById('guide-bot-panel'),c=document.getElementById('guide-bot-close');
+function t(o){p.classList.toggle('open',o);b.setAttribute('aria-expanded',o?'true':'false');}
+b.addEventListener('click',function(){t(!p.classList.contains('open'));});
+c.addEventListener('click',function(){t(false);});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')t(false);});
+/* Guide chat. Tries the live Roger Sim endpoint first; on ANY failure
+   (network, CORS, error) it says so plainly and answers from this
+   site's own pages instead. A local fallback is NEVER presented as
+   the Sim speaking. */
+var chat=document.getElementById('guide-bot-chat'),
+    form=document.getElementById('guide-bot-form'),
+    input=document.getElementById('guide-bot-input'),
+    SEARCH='https://cse.google.com/cse?cx=b75161449de954fbb',
+    API='https://roger-sim-api.onrender.com/proxy/chat';
+function addMsg(who,text){
+  var d=document.createElement('div');d.className='guide-bot-msg';
+  var s=document.createElement('b');s.textContent=who+' ';d.appendChild(s);
+  var sp=document.createElement('span');sp.textContent=text;d.appendChild(sp);
+  chat.appendChild(d);chat.scrollTop=chat.scrollHeight;return d;
+}
+function ownPagesAnswer(q){
+  var words=q.toLowerCase().split(/[^a-z0-9]+/).filter(function(w){return w.length>3;});
+  var seen={},out=[];
+  var els=document.querySelectorAll('h1,h2,h3,a[href]');
+  for(var i=0;i<els.length&&out.length<3;i++){
+    var el=els[i],txt=(el.textContent||'').trim();
+    if(!txt||txt.length<3)continue;
+    var hay=txt.toLowerCase();
+    if(!words.some(function(w){return hay.indexOf(w)>-1;}))continue;
+    var key=txt.slice(0,60);
+    if(seen[key])continue;seen[key]=1;
+    out.push({text:txt,href:el.tagName==='A'?el.getAttribute('href'):null});
+  }
+  var d=document.createElement('div');d.className='guide-bot-msg';
+  var s=document.createElement('b');s.textContent='Guide (own pages — NOT the live Sim): ';d.appendChild(s);
+  var sp=document.createElement('span');
+  sp.textContent='The live Sim could not be reached from this page — here is what the Federation’s own pages say: ';
+  d.appendChild(sp);
+  if(out.length===0){
+    var n=document.createElement('span');
+    n.textContent='Nothing on this page matches that question. ';
+    d.appendChild(n);
+  }else{
+    var ul=document.createElement('ul');
+    out.forEach(function(o){
+      var li=document.createElement('li');
+      if(o.href){var a=document.createElement('a');a.href=o.href;a.textContent=o.text;li.appendChild(a);}
+      else li.textContent=o.text;
+      ul.appendChild(li);
+    });
+    d.appendChild(ul);
+  }
+  var l=document.createElement('a');l.href=SEARCH;l.textContent='Search the whole Federation';d.appendChild(l);
+  chat.appendChild(d);chat.scrollTop=chat.scrollHeight;
+}
+form.addEventListener('submit',function(e){
+  e.preventDefault();
+  var q=input.value.trim();if(!q)return;
+  addMsg('You:',q);input.value='';
+  var wait=addMsg('Roger Sim:','Asking the live Sim…');
+  var btn=form.querySelector('button');btn.disabled=true;
+  var ctl=new AbortController();
+  var timer=setTimeout(function(){ctl.abort();},60000);
+  fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({messages:[{role:'user',content:q}]}),signal:ctl.signal})
+    .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
+    .then(function(j){
+      var ans=j&&j.choices&&j.choices[0]&&j.choices[0].message&&j.choices[0].message.content;
+      if(!ans)throw new Error('no answer in reply');
+      wait.querySelector('span').textContent=ans;
+      chat.scrollTop=chat.scrollHeight;
+    })
+    .catch(function(){wait.remove();ownPagesAnswer(q);})
+    .then(function(){clearTimeout(timer);btn.disabled=false;});
+});
+})();
+</script>
+
 </body>
 </html>
